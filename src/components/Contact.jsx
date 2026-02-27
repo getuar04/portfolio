@@ -1,6 +1,9 @@
 import React, { useMemo, useState } from "react";
 
 const CONTACT_EMAIL = "getuar.j1@gmail.com";
+const LINKEDIN_URL = "https://www.linkedin.com/in/getuar-jakupi/";
+const GITHUB_URL = "https://github.com/getuar04";
+const WHATSAPP_URL = "https://wa.me/38343833571";
 
 function buildMailto({ name, email, message }) {
   const subject = `Portfolio contact: ${name || ""}`.trim();
@@ -36,12 +39,12 @@ export default function Contact() {
       message: form.message.trim(),
     };
 
-    if (!payload.message || !payload.email) {
+    if (!payload.email || !payload.message) {
       setStatus({ state: "error", msg: "Email and message are required." });
       return;
     }
 
-    // 1) If you add a free endpoint (Formspree / Getform / etc.) in .env, we POST there.
+    // If endpoint exists, try POST
     if (endpoint) {
       try {
         const res = await fetch(endpoint, {
@@ -68,37 +71,44 @@ export default function Contact() {
       }
     }
 
-    // 2) No backend / no endpoint: fallback to mailto.
+    // No endpoint: fallback to mailto
     window.location.href = buildMailto(payload);
     setStatus({ state: "success", msg: "Email draft opened." });
   };
 
   return (
-    <div className="card p-5">
-      <div className="text-[18px] font-black">Contact</div>
-      <p className="p mt-2">
+    <div
+      className="card"
+      style={{ padding: 18, borderRadius: 22 }}
+      id="contact"
+    >
+      <div style={{ fontWeight: 900, fontSize: 18 }}>Contact</div>
+      <p className="p" style={{ marginTop: 8 }}>
         You can reach me through the following channels.
       </p>
 
-      <div className="mt-4 grid grid-cols-1 gap-3 lg:grid-cols-3">
+      <div style={{ height: 14 }} />
+
+      {/* CONTACT CARDS (same vibe as old design) */}
+      <div className="contact-grid">
         {/* EMAIL */}
-        <div className="card p-4">
-          <div className="font-black">Email</div>
+        {/* <div className="card contact-card">
+          <div style={{ fontWeight: 900 }}>Email</div>
           <div className="contact-value">{CONTACT_EMAIL}</div>
-          <div className="mt-3" />
+          <div style={{ height: 12 }} />
           <a className="btn primary" href={`mailto:${CONTACT_EMAIL}`}>
             Send email
           </a>
-        </div>
+        </div> */}
 
         {/* LINKEDIN */}
-        <div className="card p-4">
-          <div className="font-black">LinkedIn</div>
+        <div className="card contact-card">
+          <div style={{ fontWeight: 900 }}>LinkedIn</div>
           <div className="contact-value">linkedin.com/in/getuar-jakupi</div>
-          <div className="mt-3" />
+          <div style={{ height: 12 }} />
           <a
             className="btn primary"
-            href="https://www.linkedin.com/in/getuar-jakupi/"
+            href={LINKEDIN_URL}
             target="_blank"
             rel="noreferrer"
           >
@@ -106,14 +116,29 @@ export default function Contact() {
           </a>
         </div>
 
-        {/* PHONE / WHATSAPP */}
-        <div className="card p-4">
-          <div className="font-black">Phone / WhatsApp</div>
-          <div className="contact-value">+383 43 833 571</div>
-          <div className="mt-3" />
+        {/* GITHUB (NEW) */}
+        <div className="card contact-card">
+          <div style={{ fontWeight: 900 }}>GitHub</div>
+          <div className="contact-value">github.com/getuar04</div>
+          <div style={{ height: 12 }} />
           <a
             className="btn primary"
-            href="https://wa.me/38343833571"
+            href="https://github.com/getuar04"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open GitHub
+          </a>
+        </div>
+
+        {/* WHATSAPP */}
+        <div className="card contact-card">
+          <div style={{ fontWeight: 900 }}>Phone / WhatsApp</div>
+          <div className="contact-value">+383 43 833 571</div>
+          <div style={{ height: 12 }} />
+          <a
+            className="btn primary"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
           >
@@ -122,66 +147,83 @@ export default function Contact() {
         </div>
       </div>
 
-      <div className="mt-4" />
+      <div style={{ height: 14 }} />
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <form onSubmit={onSubmit} className="card p-4">
-          <div className="font-black">Quick message</div>
-          <p className="p mt-2">
-            No backend needed. If I add an endpoint later, this form will send
-            directly; otherwise it opens your email client.
-          </p>
+      {/* FORM (same style: card inside card) */}
+      <form
+        onSubmit={onSubmit}
+        className="card"
+        style={{ padding: 16, borderRadius: 18 }}
+      >
+        <div style={{ fontWeight: 900 }}>Quick message</div>
+        <p className="p" style={{ marginTop: 8 }}>
+          No backend needed. If I add an endpoint later, it will send directly;
+          otherwise it opens your email client.
+        </p>
 
-          <div className="mt-4 grid grid-cols-1 gap-3">
-            <input
-              className="input"
-              name="name"
-              placeholder="Your name"
-              value={form.name}
-              onChange={onChange}
-              autoComplete="name"
-            />
-            <input
-              className="input"
-              name="email"
-              type="email"
-              placeholder="Your email *"
-              value={form.email}
-              onChange={onChange}
-              autoComplete="email"
-              required
-            />
-            <textarea
-              className="input"
-              name="message"
-              placeholder="Message *"
-              value={form.message}
-              onChange={onChange}
-              rows={5}
-              required
-            />
-          </div>
+        <div style={{ height: 12 }} />
 
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <button
-              className={`btn primary ${status.state === "loading" ? "opacity-70" : ""}`}
-              type="submit"
-              disabled={status.state === "loading"}
-            >
-              {status.state === "loading" ? "Sending…" : "Send"}
-            </button>
-            {status.msg ? (
-              <span className="text-sm" style={{ color: "rgba(255,255,255,.75)" }}>
-                {status.msg}
-              </span>
-            ) : null}
-          </div>
-        </form>
+        <div className="contact-form-grid">
+          <input
+            className="input"
+            name="name"
+            placeholder="Your name"
+            value={form.name}
+            onChange={onChange}
+            autoComplete="name"
+          />
+          <input
+            className="input"
+            name="email"
+            type="email"
+            placeholder="Your email *"
+            value={form.email}
+            onChange={onChange}
+            autoComplete="email"
+            required
+          />
+          <textarea
+            className="input"
+            name="message"
+            placeholder="Message *"
+            value={form.message}
+            onChange={onChange}
+            rows={5}
+            required
+          />
+        </div>
 
-        <div className="note">
+        <div style={{ height: 12 }} />
+
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
+          <button
+            className={`btn primary ${status.state === "loading" ? "opacity-70" : ""}`}
+            type="submit"
+            disabled={status.state === "loading"}
+          >
+            {status.state === "loading" ? "Sending…" : "Send"}
+          </button>
+
+          {status.msg ? (
+            <span style={{ color: "rgba(255,255,255,.75)", fontSize: 13 }}>
+              {status.msg}
+            </span>
+          ) : null}
+        </div>
+      </form>
+
+      <div style={{ height: 14 }} />
+
+      <div className="note">
         I’m open to internships, junior roles, and collaborations. Feel free to
         get in touch anytime.
-      </div>
       </div>
     </div>
   );

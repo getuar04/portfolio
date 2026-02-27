@@ -1,5 +1,8 @@
 import React from "react";
 
+const LINKEDIN_URL = "https://www.linkedin.com/in/getuar-jakupi/";
+const GITHUB_URL = "https://github.com/getuar04";
+
 export default function Hero() {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
@@ -9,6 +12,7 @@ export default function Hero() {
 
   return (
     <section
+      id="home"
       style={{
         minHeight: "92vh",
         display: "flex",
@@ -25,6 +29,7 @@ export default function Hero() {
           gap: 24,
         }}
       >
+        {/* LEFT */}
         <div className="card" style={{ padding: 26 }}>
           <div className="pill">
             <span
@@ -65,6 +70,7 @@ export default function Hero() {
           </h1>
 
           <div style={{ height: 12 }} />
+
           <p className="p">
             I am a Computer Science and Engineering student at UBT, focused on
             building real-world web applications using React, JavaScript, PHP,
@@ -73,23 +79,24 @@ export default function Hero() {
           </p>
 
           <div style={{ height: 18 }} />
+
+          {/* CTA BUTTONS */}
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <button
-              className="btn primary"
-              onClick={() => scrollTo("projects")}
-            >
+            <button className="btn primary" onClick={() => scrollTo("projects")}>
               View Projects
             </button>
+
             <button className="btn" onClick={() => scrollTo("contact")}>
               Contact
             </button>
-            <a
-              className="btn"
-              href="https://www.linkedin.com/in/getuar-jakupi/"
-              target="_blank"
-              rel="noreferrer"
-            >
+
+            <a className="btn" href={LINKEDIN_URL} target="_blank" rel="noreferrer">
               LinkedIn
+            </a>
+
+            {/* GitHub (NEW) */}
+            <a className="btn" href={GITHUB_URL} target="_blank" rel="noreferrer">
+              GitHub
             </a>
           </div>
 
@@ -97,6 +104,7 @@ export default function Hero() {
           <div className="sep" />
           <div style={{ height: 16 }} />
 
+          {/* BADGES */}
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <span className="badge">Frontend (HTML/CSS/JS)</span>
             <span className="badge">JavaScript</span>
@@ -110,6 +118,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* RIGHT */}
         <div className="card" style={{ padding: 26, position: "relative" }}>
           <div style={{ display: "grid", gap: 14 }}>
             <div
@@ -126,8 +135,8 @@ export default function Hero() {
               </div>
               <div style={{ color: "rgba(255,255,255,.68)", lineHeight: 1.6 }}>
                 • Live demo links <br />
-                • Search + filter <br />• Case study: Mobileria Nita (WIP
-                responsive)
+                • Search + filter <br />
+                • Case study: Mobileria Nita (WIP responsive)
               </div>
             </div>
 

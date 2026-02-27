@@ -10,7 +10,6 @@ export default function Navbar() {
     setOpen(false);
   };
 
-  // mbyll mobile menu kur rritet ekrani
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 820) setOpen(false);
@@ -36,6 +35,18 @@ export default function Navbar() {
       <button className="btn" onClick={() => scrollTo("certificates")}>
         Certificates
       </button>
+
+      {/* GitHub button (NEW) */}
+      <a
+        className="btn ghost"
+        href="https://github.com/getuar04"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => setOpen(false)}
+      >
+        GitHub
+      </a>
+
       <button className="btn primary" onClick={() => scrollTo("contact")}>
         Contact
       </button>
@@ -50,20 +61,20 @@ export default function Navbar() {
           onClick={() => scrollTo("about")}
           role="button"
           tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") scrollTo("about");
+          }}
         >
-          {/* <div className="nav-dot" /> */}
           <div className="nav-brand-text">
             <div className="nav-name">Getuar Jakupi</div>
             <div className="nav-role">Full-Stack Developer</div>
           </div>
         </div>
 
-        {/* Desktop buttons on the right */}
         <div className="nav-desktop">
           <NavButtons />
         </div>
 
-        {/* Hamburger only on mobile */}
         <button
           className={`btn nav-burger ${open ? "primary" : ""}`}
           onClick={() => setOpen((v) => !v)}
@@ -74,7 +85,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile dropdown */}
       {open ? (
         <div className="container nav-mobile">
           <NavButtons mobile />

@@ -1,59 +1,36 @@
-import React from "react";
-
 export default function About() {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(12, 1fr)",
-        gap: 14,
-      }}
-    >
-      {/* Quick facts */}
-      <div
-        className="card"
-        style={{ gridColumn: "span 5", padding: 18, borderRadius: 22 }}
-      >
-        <div style={{ fontWeight: 900, fontSize: 18 }}>Quick facts</div>
-        <div style={{ height: 10 }} />
-        <div className="p" style={{ lineHeight: 1.9 }}>
-          🎓 BSc in Computer Science and Engineering – present <br />
-          🌍 Based in Kosovo <br />
-          💻 Passionate about web development <br />
-          📚 Learning React, Node.js, and SQL in depth
+    <section id="about" className="section-padding">
+      <div className="container-main">
+        <div className="mb-12 max-w-3xl">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">
+            About Me
+          </p>
+          <h2 className="text-3xl font-bold sm:text-4xl">
+            Not just coursework. Real practical development.
+          </h2>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="glass rounded-[28px] p-8 shadow-soft transition duration-300 hover:-translate-y-1">
+            <p className="text-lg leading-8 text-slate-300">
+              I am a Computer Science and Engineering student at UBT with a
+              strong focus on full-stack development. I build practical
+              applications using React, Node.js, Express, MySQL, MongoDB, and
+              REST APIs.
+            </p>
+          </div>
+
+          <div className="glass rounded-[28px] p-8 shadow-soft transition duration-300 hover:-translate-y-1">
+            <p className="text-lg leading-8 text-slate-300">
+              My work includes dashboards, CRUD platforms, authentication
+              systems, role-based applications, AI chatbot projects, and backend
+              logic that solves real user needs. I am focused on growing into a
+              strong junior full-stack developer.
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* About me */}
-      <div
-        className="card"
-        style={{ gridColumn: "span 7", padding: 18, borderRadius: 22 }}
-      >
-        <div style={{ fontWeight: 900, fontSize: 18 }}>About me</div>
-        <p className="p" style={{ marginTop: 10 }}>
-          I'm Getuar Jakupi, a Computer Science and Engineering student at UBT
-          (University for Business and Technology). I enjoy building practical
-          web applications, understanding how systems work end-to-end, and
-          improving my coding skills through real projects.
-        </p>
-        <p className="p" style={{ marginTop: 10 }}>
-          My main focus right now is on JavaScript / React on the frontend and
-          PHP / Node.js with MySQL on the backend. I also work with databases,
-          SQL, and basic DevOps tasks like hosting applications on free hosting
-          platforms.
-        </p>
-        <p className="p" style={{ marginTop: 10 }}>
-          I'm always open to internships, junior roles, or any opportunity where
-          I can learn fast, contribute to a team, and work on real products.
-        </p>
-      </div>
-
-      <style>{`
-        @media (max-width: 920px){
-          div[style*="grid-column: span 5"]{ grid-column: span 12 !important; }
-          div[style*="grid-column: span 7"]{ grid-column: span 12 !important; }
-        }
-      `}</style>
-    </div>
+    </section>
   );
 }

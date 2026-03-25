@@ -1,79 +1,57 @@
-import React from "react";
-
 export default function Contact() {
   return (
-    <div className="card" style={{ padding: 18, borderRadius: 22 }} id="contact">
-      <div style={{ fontWeight: 900, fontSize: 18 }}>Contact</div>
-      <p className="p" style={{ marginTop: 8 }}>
-        You can reach me through the following channels.
-      </p>
+    <section id="contact" className="section-padding">
+      <div className="container-main">
+        <div className="glass rounded-[32px] p-8 shadow-glow">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-400">
+                Contact
+              </p>
+              <h2 className="mb-4 text-3xl font-bold">
+                Let’s build something serious.
+              </h2>
+              <p className="max-w-xl leading-8 text-slate-300">
+                I’m open to internships, junior developer roles, freelance work,
+                and collaboration on real-world projects.
+              </p>
+            </div>
 
-      <div style={{ height: 16 }} />
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm text-slate-400">Email</p>
+                <p className="text-lg font-medium text-white">
+                  your.email@example.com
+                </p>
+              </div>
 
-      <div className="contact-grid">
-        {/* EMAIL */}
-        <div className="card contact-card">
-          <div style={{ fontWeight: 900 }}>Email</div>
-          <div className="contact-value">getuar.j1@gmail.com</div>
-          <div style={{ height: 12 }} />
-          <a className="btn primary" href="mailto:getuar.j1@gmail.com">
-            Send Email
-          </a>
-        </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm text-slate-400">LinkedIn</p>
+                <a
+                  href="https://www.linkedin.com/in/getuar-jakupi/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-lg font-medium text-white hover:text-brand-300"
+                >
+                  linkedin.com/in/getuar-jakupi
+                </a>
+              </div>
 
-        {/* LINKEDIN */}
-        <div className="card contact-card">
-          <div style={{ fontWeight: 900 }}>LinkedIn</div>
-          <div className="contact-value">
-            linkedin.com/in/getuar-jakupi
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-sm text-slate-400">GitHub</p>
+                <a
+                  href="https://github.com/getuar04"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-lg font-medium text-white hover:text-brand-300"
+                >
+                  github.com/getuar04
+                </a>
+              </div>
+            </div>
           </div>
-          <div style={{ height: 12 }} />
-          <a
-            className="btn primary"
-            href="https://www.linkedin.com/in/getuar-jakupi/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open LinkedIn
-          </a>
-        </div>
-
-        {/* GITHUB */}
-        <div className="card contact-card">
-          <div style={{ fontWeight: 900 }}>GitHub</div>
-          <div className="contact-value">github.com/getuar04</div>
-          <div style={{ height: 12 }} />
-          <a
-            className="btn primary"
-            href="https://github.com/getuar04"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open GitHub
-          </a>
-        </div>
-
-        {/* WHATSAPP */}
-        <div className="card contact-card">
-          <div style={{ fontWeight: 900 }}>Phone / WhatsApp</div>
-          <div className="contact-value">+383 43 833 571</div>
-          <div style={{ height: 12 }} />
-          <a
-            className="btn primary"
-            href="https://wa.me/38343833571"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Chat on WhatsApp
-          </a>
         </div>
       </div>
-
-      <div style={{ height: 18 }} />
-
-      <div className="note">
-        I’m open to internships, junior roles, and collaborations.
-      </div>
-    </div>
+    </section>
   );
 }

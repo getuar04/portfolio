@@ -1,72 +1,161 @@
-import { useState } from "react";
-
-const links = [
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "CV", href: "#cv" },
-  { name: "Certificates", href: "#certificates" },
-  { name: "Contact", href: "#contact" },
-];
+import { useState, useEffect } from "react";
+import { useLang } from "../context/LanguageContext";
 
 export default function Navbar() {
+  const { lang, toggle, t } = useLang();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const links = [
+    { key: "about", href: "#about" },
+    { key: "projects", href: "#projects" },
+    { key: "skills", href: "#skills" },
+    { key: "cv", href: "#cv" },
+    { key: "certificates", href: "#certificates" },
+    { key: "contact", href: "#contact" },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
-      <div className="container-main flex h-16 items-center justify-between">
-        <a
-          href="#home"
-          className="text-lg font-semibold tracking-wide text-white"
-        >
-          Getuar <span className="text-brand-400">Jakupi</span>
+    <header
+      className="fixed top-0 inset-x-0 z-50 transition-all duration-500"
+      style={{
+        background: scrolled
+          ? "rgba(8,8,16,0.85)"
+          : "transparent",
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
+      }}
+    >
+      <div className="wrap flex h-16 items-center justify-between">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2 group">
+          <div
+            className="h-8 w-8 rounded-lg flex items-center justify-center text-white text-sm font-bold"
+            style={{ background: "var(--accent)", fontFamily: "'Syne', sans-serif" }}
+          >
+            GJ
+          </div>
+          <span
+            className="font-bold text-white text-sm tracking-wide hidden sm:block"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            Getuar <span style={{ color: "var(--accent-light)" }}>Jakupi</span>
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-1">
           {links.map((link) => (
             <a
-              key={link.name}
+              key={link.key}
               href={link.href}
-              className="text-sm text-slate-300 transition duration-300 hover:text-white"
+              className="px-4 py-2 text-sm rounded-full transition-all duration-200"
+              style={{ color: "rgba(255,255,255,0.6)" }}
+              onMouseEnter={(e) => (e.target.style.color = "white")}
+              onMouseLeave={(e) => (e.target.style.color = "rgba(255,255,255,0.6)")}
             >
-              {link.name}
+              {t.nav[link.key]}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        {/* Right side */}
+        <div className="flex items-center gap-2">
+          {/* Lang toggle */}
+          <button
+            onClick={toggle}
+            className="hidden sm:flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200"
+            style={{
+              border: "1px solid var(--border)",
+              background: "var(--surface)",
+              color: "var(--accent-light)",
+              fontFamily: "'Syne', sans-serif",
+            }}
+          >
+            <span className="text-base leading-none">{lang === "en" ? "🇦🇱" : "🇬🇧"}</span>
+            {lang === "en" ? "SQ" : "EN"}
+          </button>
+
           <a
             href="#contact"
-            className="hidden rounded-full border border-brand-400/40 bg-brand-500/10 px-4 py-2 text-sm font-medium text-white transition hover:scale-105 hover:bg-brand-500/20 md:inline-flex"
+            className="btn-primary hidden md:inline-flex"
+            style={{ fontFamily: "'Syne', sans-serif" }}
           >
-            Let’s Talk
+            {t.nav.letsTalk}
           </a>
 
+          {/* Mobile hamburger */}
           <button
             onClick={() => setOpen(!open)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white md:hidden"
+            className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg"
+            style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
           >
-            ☰
+            <span
+              className="block w-5 h-0.5 transition-all duration-300 origin-center"
+              style={{
+                background: "white",
+                transform: open ? "rotate(45deg) translate(2px, 2px)" : "",
+              }}
+            />
+            <span
+              className="block w-5 h-0.5 transition-all duration-300"
+              style={{ background: "white", opacity: open ? 0 : 1 }}
+            />
+            <span
+              className="block w-5 h-0.5 transition-all duration-300 origin-center"
+              style={{
+                background: "white",
+                transform: open ? "rotate(-45deg) translate(2px, -2px)" : "",
+              }}
+            />
           </button>
         </div>
       </div>
 
-      {open && (
-        <div className="border-t border-white/10 bg-slate-950/95 md:hidden">
-          <div className="container-main flex flex-col py-4">
-            {links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="py-3 text-sm text-slate-300 transition hover:text-white"
-              >
-                {link.name}
-              </a>
-            ))}
+      {/* Mobile menu */}
+      <div
+        className="md:hidden overflow-hidden transition-all duration-300"
+        style={{
+          maxHeight: open ? "400px" : "0",
+          borderBottom: open ? "1px solid rgba(255,255,255,0.06)" : "none",
+          background: "rgba(8,8,16,0.98)",
+          backdropFilter: "blur(20px)",
+        }}
+      >
+        <div className="wrap flex flex-col py-4 gap-1">
+          {links.map((link) => (
+            <a
+              key={link.key}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="py-3 px-4 rounded-xl text-sm transition-all duration-200"
+              style={{ color: "rgba(255,255,255,0.7)" }}
+            >
+              {t.nav[link.key]}
+            </a>
+          ))}
+          <div className="mt-3 flex items-center gap-3 px-4">
+            <button
+              onClick={toggle}
+              className="flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
+              style={{
+                border: "1px solid var(--border)",
+                background: "var(--surface)",
+                color: "var(--accent-light)",
+              }}
+            >
+              <span>{lang === "en" ? "🇦🇱" : "🇬🇧"}</span>
+              {lang === "en" ? "Shqip" : "English"}
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

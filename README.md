@@ -1,68 +1,63 @@
-# Getuar Jakupi – Personal Portfolio
+# Getuar Jakupi — Portfolio
 
-Modern personal portfolio website built with **React** and **Tailwind CSS** showcasing my full-stack projects, technical skills, and experience.
+Modern, bilingual (EN/SQ) React portfolio with Tailwind CSS.
 
-## 🌐 Live Demo
-👉 https://your-domain.com  
-(or Vercel / Netlify link)
-
----
-
-## 🧑‍💻 About Me
-
-Computer Science & Engineering student passionate about full-stack development.  
-Focused on building scalable web applications using modern technologies.
-
----
-
-## 🛠 Tech Stack
-
-### Frontend
-- React
-- Tailwind CSS
-- JavaScript (ES6+)
-- Responsive Design
-
-### Backend (Projects)
-- Node.js
-- Express.js
-- JWT Authentication
-- Role-Based Access Control (RBAC)
-
-### Databases
-- MySQL
-- MongoDB
-
-### Tools & Other
-- Git & GitHub
-- Docker
-- ImageKit
-- Postman
-
----
-
-## 📂 Features
-
-- Modern responsive UI
-- Clean minimal design
-- Projects showcase
-- Skills section
-- Contact form
-- GitHub integration
-- SEO optimized
-
----
-
-## 📸 Preview
-
-![Portfolio Preview](./public/og.jpg)
-
----
-
-## 📦 Installation
-
-Clone the repository:
+## Setup
 
 ```bash
-git clone https://github.com/getuar04/portofolio.git
-cd portofolio
+npm install
+npm start
+```
+
+## Build for production
+
+```bash
+npm run build
+```
+
+## Folder structure
+
+```
+src/
+  context/
+    LanguageContext.js     ← All translations (EN + SQ) + language toggle
+  data/
+    projects.js            ← All projects data (add/edit here)
+    skills.js              ← Skills groups (add/edit here)
+    certificates.js        ← Certificates list (add/edit here)
+  hooks/
+    useScrollReveal.js     ← Scroll animation hook
+  components/
+    Navbar.jsx
+    Hero.jsx
+    About.jsx
+    Projects.jsx           ← Includes modal + filter
+    Skills.jsx
+    CV.jsx
+    Certificates.jsx
+    Contact.jsx
+    Footer.jsx             ← Footer + ScrollToTop
+  styles/
+    globals.css            ← All custom CSS + animations
+  App.js
+  index.js
+
+public/
+  cv/
+    Getuar-Jakupi-CV.pdf   ← Place your CV here
+  certificates/
+    cert1.png ... cert5.png
+    Getuar Jakupi.pdf ...  ← Place certificates here
+```
+
+## How to update content
+
+- **Projects**: Edit `src/data/projects.js` — add `github`, `live`, `screenshots` links
+- **Skills**: Edit `src/data/skills.js` — add/remove items per group
+- **Certificates**: Edit `src/data/certificates.js` — update labels, issuers, years
+- **Translations**: Edit `src/context/LanguageContext.js` — both EN and SQ
+
+## Language toggle
+
+Click the flag button in the navbar (🇦🇱 / 🇬🇧) to switch between English and Albanian.
+All text content switches instantly without page reload.

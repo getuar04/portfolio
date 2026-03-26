@@ -1,56 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --accent: #7c3aed;
+  --accent-light: #a78bfa;
+  --accent-glow: rgba(124, 58, 237, 0.35);
+  --gold: #f59e0b;
+  --gold-light: #fcd34d;
+  --surface: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
 }
+
+html { scroll-behavior: smooth; }
 
 body {
-  @apply bg-slate-950 text-white antialiased;
-  margin: 0;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  @apply bg-[#080810] text-white antialiased;
+  overflow-x: hidden;
 }
 
-* {
-  box-sizing: border-box;
+* { box-sizing: border-box; }
+
+::selection { background: var(--accent-glow); color: white; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #080810; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(.16,1,.3,1), transform 0.65s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* Glass card */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-::selection {
-  background: rgba(99, 102, 241, 0.35);
+/* Gradient text */
+.grad-text {
+  background: linear-gradient(135deg, #fff 0%, var(--accent-light) 60%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* Glow lines */
+.glow-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  opacity: 0.3;
+}
+
+/* Tag pill */
+.tag {
+  @apply rounded-full border px-3 py-1 text-xs font-medium;
+  border-color: var(--border);
+  color: rgba(255,255,255,0.55);
+  background: var(--surface);
+  transition: all 0.2s;
+}
+.tag:hover {
+  border-color: var(--accent-light);
+  color: var(--accent-light);
+}
+
+/* Section label */
+.section-label {
+  font-family: 'Syne', sans-serif;
+  @apply text-xs font-semibold uppercase tracking-[0.25em];
+  color: var(--accent-light);
+}
+
+/* Heading */
+.section-heading {
+  font-family: 'Syne', sans-serif;
+  @apply text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight;
+}
+
+/* Container */
+.wrap {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+/* Section padding */
+.sec {
+  @apply py-24 md:py-32;
+}
+
+/* Button */
+.btn-primary {
+  @apply inline-flex items-center gap-2 rounded-full font-semibold text-sm px-6 py-3 transition-all duration-300;
+  background: var(--accent);
   color: white;
+  box-shadow: 0 0 0 0 var(--accent-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--accent-glow);
 }
 
-img {
-  display: block;
-  max-width: 100%;
+.btn-ghost {
+  @apply inline-flex items-center gap-2 rounded-full font-medium text-sm px-6 py-3 transition-all duration-300;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: rgba(255,255,255,0.8);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
 }
 
-a {
-  text-decoration: none;
+/* Card hover */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(.16,1,.3,1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 58, 237, 0.3) !important;
+  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.12);
 }
 
-@layer utilities {
-  .container-main {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-  }
+/* Typing cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor { animation: blink 1s step-end infinite; }
 
-  .glass {
-    @apply border border-white/10 bg-white/5 backdrop-blur-xl;
-  }
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
 
-  .section-padding {
-    @apply py-20 md:py-28;
-  }
+/* Pulse glow */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+.pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
 
-  .heading-gradient {
-    @apply bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent;
-  }
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 20s linear infinite; }
+
+/* Status dot */
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+}
+.status-dot { animation: statusPulse 2s ease-in-out infinite; }
+
+/* Grid bg */
+.grid-bg {
+  background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 48px 48px;
 }

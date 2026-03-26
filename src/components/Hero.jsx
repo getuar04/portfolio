@@ -1,96 +1,211 @@
-export default function Hero() {
-  return (
-    <section id="home" className="relative section-padding pt-24 md:pt-32">
-      <div className="container-main grid items-center gap-12 lg:grid-cols-2">
-        <div className="space-y-8">
-          <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300 backdrop-blur">
-            Computer Science & Engineering Student • Full-Stack Developer
-          </div>
+import { useEffect, useState } from "react";
+import { useLang } from "../context/LanguageContext";
 
-          <div className="space-y-5">
-            <h1 className="max-w-4xl text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-              Building <span className="heading-gradient">modern web apps</span>{" "}
-              with real backend logic, practical architecture, and clean
-              interfaces.
+const currentProjects = [
+  "Course Management System",
+  "Social Media App",
+  "2FA Auth System",
+  "Albanian AI Chatbot",
+];
+
+export default function Hero() {
+  const { t } = useLang();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+      setTimeout(() => {
+        setCurrentIndex((i) => (i + 1) % currentProjects.length);
+        setFade(true);
+      }, 300);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center pt-16 overflow-hidden grid-bg"
+    >
+      {/* Background orbs */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div
+          className="absolute top-[-10%] left-[20%] h-[600px] w-[600px] rounded-full pulse-glow"
+          style={{ background: "radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute bottom-[10%] right-[-5%] h-[400px] w-[400px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute top-[40%] left-[-10%] h-[300px] w-[300px] rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%)" }}
+        />
+      </div>
+
+      <div className="wrap w-full py-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left */}
+          <div>
+            {/* Badge */}
+            <div
+              className="reveal visible inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium mb-8"
+              style={{ border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", color: "var(--accent-light)" }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 status-dot" />
+              {t.hero.badge}
+            </div>
+
+            {/* Headline */}
+            <h1
+              className="reveal visible reveal-delay-1 text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] mb-6"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              {t.hero.headline1}{" "}
+              <span className="grad-text">{t.hero.headline2}</span>
+              <br />
+              <span className="text-3xl sm:text-4xl lg:text-5xl font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
+                {t.hero.headline3}
+              </span>
             </h1>
 
-            <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-              I’m Getuar Jakupi, focused on React, Node.js, MySQL, MongoDB,
-              authentication systems, dashboards, APIs, and real full-stack
-              projects.
+            {/* Sub */}
+            <p
+              className="reveal visible reveal-delay-2 text-base sm:text-lg leading-8 mb-10 max-w-xl"
+              style={{ color: "rgba(255,255,255,0.55)" }}
+            >
+              {t.hero.sub}
             </p>
+
+            {/* CTAs */}
+            <div className="reveal visible reveal-delay-3 flex flex-wrap gap-3 mb-10">
+              <a href="#projects" className="btn-primary" style={{ fontFamily: "'Syne', sans-serif" }}>
+                {t.hero.cta1}
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a
+                href="/cv/Getuar-Jakupi-CV.pdf"
+                download
+                className="btn-ghost"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                {t.hero.cta2}
+              </a>
+            </div>
+
+            {/* Social links */}
+            <div className="reveal visible reveal-delay-4 flex items-center gap-4">
+              <a
+                href="https://github.com/getuar04"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm transition-all duration-200 hover:text-white"
+                style={{ color: "rgba(255,255,255,0.4)" }}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                </svg>
+                getuar04
+              </a>
+              <span style={{ color: "rgba(255,255,255,0.15)" }}>·</span>
+              <a
+                href="https://www.linkedin.com/in/getuar-jakupi/"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-sm transition-all duration-200 hover:text-white"
+                style={{ color: "rgba(255,255,255,0.4)" }}
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                getuar-jakupi
+              </a>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="rounded-full bg-white px-6 py-3 font-semibold text-slate-950 transition duration-300 hover:-translate-y-1"
-            >
-              View Projects
-            </a>
-            <a
-              href="/cv/Getuar-Jakupi-CV.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-white/10"
-            >
-              View CV
-            </a>
-          </div>
+          {/* Right — floating card */}
+          <div className="relative flex items-center justify-center">
+            <div
+              className="absolute h-80 w-80 rounded-full pulse-glow"
+              style={{ background: "radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)" }}
+            />
+            <div className="glass rounded-[28px] p-6 w-full max-w-sm float shadow-2xl" style={{ boxShadow: "0 0 0 1px rgba(124,58,237,0.2), 0 30px 80px rgba(124,58,237,0.15)" }}>
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.4)" }}>{t.hero.status}</p>
+                  <p className="font-semibold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
+                    <span
+                      className="transition-opacity duration-300"
+                      style={{ opacity: fade ? 1 : 0 }}
+                    >
+                      {currentProjects[currentIndex]}
+                    </span>
+                  </p>
+                </div>
+                <div className="h-2.5 w-2.5 rounded-full bg-emerald-400 status-dot" />
+              </div>
 
-          <div className="flex flex-wrap gap-3 text-sm text-slate-400">
-            <span className="rounded-full border border-white/10 px-3 py-1">
-              React
-            </span>
-            <span className="rounded-full border border-white/10 px-3 py-1">
-              Node.js
-            </span>
-            <span className="rounded-full border border-white/10 px-3 py-1">
-              MySQL
-            </span>
-            <span className="rounded-full border border-white/10 px-3 py-1">
-              MongoDB
-            </span>
-            <span className="rounded-full border border-white/10 px-3 py-1">
-              JWT
-            </span>
-            <span className="rounded-full border border-white/10 px-3 py-1">
-              REST APIs
-            </span>
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                {[
+                  { val: "4+", label: "Full-Stack" },
+                  { val: "5+", label: "Frontend" },
+                  { val: "2026", label: "Latest" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-2xl p-3 text-center"
+                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+                  >
+                    <p className="text-xl font-black mb-0.5 grad-text" style={{ fontFamily: "'Syne', sans-serif" }}>{stat.val}</p>
+                    <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Stack marquee */}
+              <div className="overflow-hidden rounded-xl py-3" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <div className="marquee-track flex gap-4 w-max">
+                  {["React", "Node.js", "MySQL", "MongoDB", "JWT", "Express", "Docker", "Tailwind", "React", "Node.js", "MySQL", "MongoDB", "JWT", "Express", "Docker", "Tailwind"].map((tech, i) => (
+                    <span key={i} className="text-xs px-3 py-1 rounded-full shrink-0" style={{ background: "rgba(124,58,237,0.15)", color: "var(--accent-light)", border: "1px solid rgba(124,58,237,0.2)" }}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-xl items-center justify-center">
-          <div className="absolute h-72 w-72 rounded-full bg-brand-500/20 blur-3xl animate-glowPulse" />
-          <div className="glass relative w-full rounded-[28px] p-6 shadow-glow">
-            <div className="mb-5 flex items-center justify-between">
-              <div>
-                <p className="text-sm text-slate-400">Current Focus</p>
-                <h3 className="text-xl font-semibold text-white">
-                  Building Better Projects
-                </h3>
-              </div>
-              <div className="h-3 w-3 rounded-full bg-emerald-400 animate-pulse" />
-            </div>
-
-            <div className="space-y-4">
-              {[
-                "Course Management System",
-                "Social Media App",
-                "2FA Authentication System",
-                "Albanian AI Chatbot",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="rounded-2xl border border-white/10 bg-white/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:bg-white/10"
-                >
-                  <p className="font-medium text-white">{item}</p>
-                </div>
-              ))}
-            </div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <div className="w-px h-10 relative overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
+            <div
+              className="absolute top-0 left-0 w-full h-1/2"
+              style={{
+                background: "linear-gradient(to bottom, transparent, var(--accent-light))",
+                animation: "scrollDown 1.8s ease-in-out infinite",
+              }}
+            />
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes scrollDown {
+          0% { transform: translateY(-100%); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateY(200%); opacity: 0; }
+        }
+      `}</style>
     </section>
   );
 }

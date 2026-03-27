@@ -32,56 +32,66 @@ export default function Hero() {
       {/* Background orbs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
-          className="absolute top-[-10%] left-[20%] h-[600px] w-[600px] rounded-full pulse-glow"
+          className="absolute top-[-10%] left-[10%] h-[400px] w-[400px] sm:h-[600px] sm:w-[600px] rounded-full pulse-glow"
           style={{ background: "radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%)" }}
         />
         <div
-          className="absolute bottom-[10%] right-[-5%] h-[400px] w-[400px] rounded-full"
+          className="absolute bottom-[10%] right-[-5%] h-[250px] w-[250px] sm:h-[400px] sm:w-[400px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)" }}
-        />
-        <div
-          className="absolute top-[40%] left-[-10%] h-[300px] w-[300px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%)" }}
         />
       </div>
 
-      <div className="wrap w-full py-20">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left */}
-          <div>
+      <div className="wrap w-full py-16 sm:py-20">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+          {/* LEFT */}
+          <div className="order-2 lg:order-1">
             {/* Badge */}
             <div
-              className="reveal visible inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium mb-8"
+              className="reveal visible inline-flex items-center gap-2 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-medium mb-6 sm:mb-8"
               style={{ border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.08)", color: "var(--accent-light)" }}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 status-dot" />
-              {t.hero.badge}
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 status-dot shrink-0" />
+              <span className="leading-tight">{t.hero.badge}</span>
             </div>
 
             {/* Headline */}
             <h1
-              className="reveal visible reveal-delay-1 text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] mb-6"
-              style={{ fontFamily: "'Syne', sans-serif" }}
+              className="reveal visible reveal-delay-1 font-black leading-[1.05] mb-5 sm:mb-6"
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
+              }}
             >
               {t.hero.headline1}{" "}
               <span className="grad-text">{t.hero.headline2}</span>
               <br />
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>
+              <span
+                className="font-semibold"
+                style={{
+                  fontSize: "clamp(1.1rem, 3vw, 2rem)",
+                  color: "rgba(255,255,255,0.45)",
+                }}
+              >
                 {t.hero.headline3}
               </span>
             </h1>
 
             {/* Sub */}
             <p
-              className="reveal visible reveal-delay-2 text-base sm:text-lg leading-8 mb-10 max-w-xl"
+              className="reveal visible reveal-delay-2 text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 mb-8 sm:mb-10 max-w-xl"
               style={{ color: "rgba(255,255,255,0.55)" }}
             >
               {t.hero.sub}
             </p>
 
             {/* CTAs */}
-            <div className="reveal visible reveal-delay-3 flex flex-wrap gap-3 mb-10">
-              <a href="#projects" className="btn-primary" style={{ fontFamily: "'Syne', sans-serif" }}>
+            <div className="reveal visible reveal-delay-3 flex flex-wrap gap-3 mb-8 sm:mb-10">
+              <a
+                href="#projects"
+                className="btn-primary"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
                 {t.hero.cta1}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -101,7 +111,7 @@ export default function Hero() {
             </div>
 
             {/* Social links */}
-            <div className="reveal visible reveal-delay-4 flex items-center gap-4">
+            <div className="reveal visible reveal-delay-4 flex items-center gap-4 flex-wrap">
               <a
                 href="https://github.com/getuar04"
                 target="_blank"
@@ -130,31 +140,32 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — floating card */}
-          <div className="relative flex items-center justify-center">
+          {/* RIGHT — floating card */}
+          <div className="order-1 lg:order-2 relative flex items-center justify-center">
             <div
-              className="absolute h-80 w-80 rounded-full pulse-glow"
+              className="absolute h-56 w-56 sm:h-72 sm:w-72 rounded-full pulse-glow"
               style={{ background: "radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)" }}
             />
-            <div className="glass rounded-[28px] p-6 w-full max-w-sm float shadow-2xl" style={{ boxShadow: "0 0 0 1px rgba(124,58,237,0.2), 0 30px 80px rgba(124,58,237,0.15)" }}>
+            <div
+              className="glass rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 w-full max-w-xs sm:max-w-sm float"
+              style={{ boxShadow: "0 0 0 1px rgba(124,58,237,0.2), 0 30px 80px rgba(124,58,237,0.15)" }}
+            >
               {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div>
+              <div className="flex items-center justify-between mb-5">
+                <div className="min-w-0 flex-1 pr-3">
                   <p className="text-xs mb-1" style={{ color: "rgba(255,255,255,0.4)" }}>{t.hero.status}</p>
-                  <p className="font-semibold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
-                    <span
-                      className="transition-opacity duration-300"
-                      style={{ opacity: fade ? 1 : 0 }}
-                    >
-                      {currentProjects[currentIndex]}
-                    </span>
+                  <p
+                    className="font-semibold text-white text-sm sm:text-base truncate transition-opacity duration-300"
+                    style={{ fontFamily: "'Syne', sans-serif", opacity: fade ? 1 : 0 }}
+                  >
+                    {currentProjects[currentIndex]}
                   </p>
                 </div>
-                <div className="h-2.5 w-2.5 rounded-full bg-emerald-400 status-dot" />
+                <div className="h-2.5 w-2.5 rounded-full bg-emerald-400 status-dot shrink-0" />
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-3 mb-6">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
                 {[
                   { val: "4+", label: "Full-Stack" },
                   { val: "5+", label: "Frontend" },
@@ -162,20 +173,35 @@ export default function Hero() {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-2xl p-3 text-center"
+                    className="rounded-xl sm:rounded-2xl p-2.5 sm:p-3 text-center"
                     style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
                   >
-                    <p className="text-xl font-black mb-0.5 grad-text" style={{ fontFamily: "'Syne', sans-serif" }}>{stat.val}</p>
-                    <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>{stat.label}</p>
+                    <p
+                      className="text-lg sm:text-xl font-black mb-0.5 grad-text"
+                      style={{ fontFamily: "'Syne', sans-serif" }}
+                    >
+                      {stat.val}
+                    </p>
+                    <p className="text-[9px] sm:text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                      {stat.label}
+                    </p>
                   </div>
                 ))}
               </div>
 
               {/* Stack marquee */}
-              <div className="overflow-hidden rounded-xl py-3" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                <div className="marquee-track flex gap-4 w-max">
-                  {["React", "Node.js", "MySQL", "MongoDB", "JWT", "Express", "Docker", "Tailwind", "React", "Node.js", "MySQL", "MongoDB", "JWT", "Express", "Docker", "Tailwind"].map((tech, i) => (
-                    <span key={i} className="text-xs px-3 py-1 rounded-full shrink-0" style={{ background: "rgba(124,58,237,0.15)", color: "var(--accent-light)", border: "1px solid rgba(124,58,237,0.2)" }}>
+              <div
+                className="overflow-hidden rounded-xl py-2.5 sm:py-3"
+                style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+              >
+                <div className="marquee-track flex gap-3 sm:gap-4 w-max">
+                  {["React", "Node.js", "MySQL", "MongoDB", "JWT", "Express", "Docker", "Tailwind",
+                    "React", "Node.js", "MySQL", "MongoDB", "JWT", "Express", "Docker", "Tailwind"].map((tech, i) => (
+                    <span
+                      key={i}
+                      className="text-xs px-2.5 sm:px-3 py-1 rounded-full shrink-0"
+                      style={{ background: "rgba(124,58,237,0.15)", color: "var(--accent-light)", border: "1px solid rgba(124,58,237,0.2)" }}
+                    >
                       {tech}
                     </span>
                   ))}
@@ -185,8 +211,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        {/* Scroll indicator — hidden on very small screens */}
+        <div className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2">
           <div className="w-px h-10 relative overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
             <div
               className="absolute top-0 left-0 w-full h-1/2"

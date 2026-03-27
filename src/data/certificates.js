@@ -1,8 +1,8 @@
 const certificates = [
   {
     id: 1,
-    label: "Full Stack Development",
-    labelSq: "Zhvillim Full Stack",
+    label: "NodeJS Module",
+    labelSq: "NodeJS Module",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -10,8 +10,8 @@ const certificates = [
   },
   {
     id: 2,
-    label: "Certificate 2",
-    labelSq: "Çertifikatë 2",
+    label: "Database-Mongodb",
+    labelSq: "Baza e të dhënave-Mongodb",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -19,8 +19,8 @@ const certificates = [
   },
   {
     id: 3,
-    label: "Certificate 3",
-    labelSq: "Çertifikatë 3",
+    label: "JavaScript",
+    labelSq: "JavaScript",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -28,8 +28,8 @@ const certificates = [
   },
   {
     id: 4,
-    label: "Certificate 4",
-    labelSq: "Çertifikatë 4",
+    label: "React Js & Advanced Module",
+    labelSq: "React Js & Module i Avancuar",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -37,8 +37,8 @@ const certificates = [
   },
   {
     id: 5,
-    label: "Certificate 5",
-    labelSq: "Çertifikatë 5",
+    label: "HTML5 & CSS3",
+    labelSq: "HTML5 & CSS3",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -46,8 +46,8 @@ const certificates = [
   },
   {
     id: 6,
-    label: "Certificate 6",
-    labelSq: "Çertifikatë 6",
+    label: "Full Stack Web Development",
+    labelSq: "Zhvillim Web Full Stack",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",

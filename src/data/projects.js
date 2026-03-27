@@ -30,7 +30,8 @@ const projects = [
     stack: ["React", "Node.js", "Express", "MySQL", "JWT", "RBAC", "Bootstrap"],
     github: null,
     live: null,
-    screenshots: "https://drive.google.com/drive/folders/1RrkcH0WkyM2VH9Dj-7LXd5pUi15LSR7W?usp=drive_link",
+    screenshots: "https://drive.google.com/drive/folders/1yixSis1RJwIIlKu43DKUxmEJ6DpOEPTr?usp=sharing",
+    linkedin: null,
   },
   {
     id: "2fa-auth",
@@ -47,6 +48,7 @@ const projects = [
     github: "https://github.com/getuar04/Two_Factor_Authentication",
     live: null,
     screenshots: null,
+    linkedin: null,
   },
   {
     id: "chatbot",
@@ -63,6 +65,7 @@ const projects = [
     github: "https://github.com/getuar04/chat-bot",
     live: null,
     screenshots: null,
+    linkedin: null,
   },
   {
     id: "book-list",
@@ -77,6 +80,7 @@ const projects = [
     github: null,
     live: "https://book-list-getu.rf.gd/?i=2",
     screenshots: null,
+    linkedin: null,
   },
   {
     id: "countries-app",
@@ -91,6 +95,7 @@ const projects = [
     github: null,
     live: "https://countries-app-getu.infinityfree.me/?i=1",
     screenshots: null,
+    linkedin: null,
   },
   {
     id: "todo-list",
@@ -105,6 +110,7 @@ const projects = [
     github: null,
     live: "https://todolistgetu.infinityfree.me/?i=2",
     screenshots: null,
+    linkedin: null,
   },
   {
     id: "weather-app",
@@ -119,6 +125,7 @@ const projects = [
     github: null,
     live: "https://weather-app-getu.infinityfree.me/?i=2",
     screenshots: null,
+    linkedin: null,
   },
   {
     id: "mobileria-nita",
@@ -134,7 +141,8 @@ const projects = [
     stack: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
     github: null,
     live: null,
-    screenshots: null,
+    screenshots: "https://drive.google.com/drive/folders/1RrkcH0WkyM2VH9Dj-7LXd5pUi15LSR7W?usp=drive_link",
+    linkedin: null,
   },
 ];
 

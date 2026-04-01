@@ -13,9 +13,9 @@ export function Footer() {
         style={{ color: "rgba(255,255,255,0.3)" }}
       >
         <p>
-          © {new Date().getFullYear()} Getuar Jakupi. {t.footer.rights}
+          © {new Date().getFullYear()} Portfolio. {t.footer.rights}
         </p>
-        <p>{t.footer.built}</p>
+        <p>Getuar Jakupi</p>
       </div>
     </footer>
   );

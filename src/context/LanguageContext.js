@@ -24,8 +24,10 @@ const translations = {
     about: {
       label: "About Me",
       heading: "Not just coursework.\nReal practical development.",
-      card1: "I'm a Computer Science and Engineering student at UBT, Pristina, with a strong focus on full-stack development. I build practical applications using React, Node.js, Express, MySQL, MongoDB, and REST APIs.",
-      card2: "My work includes dashboards, CRUD platforms, authentication systems, role-based applications, AI chatbot projects, and backend logic that solves real user needs. Currently expanding with .NET and ASP.NET.",
+      card1:
+        "I'm a Computer Science and Engineering student at UBT, Pristina, with a strong focus on full-stack development. I build practical applications using React, Node.js, Express, MySQL, MongoDB, and REST APIs.",
+      card2:
+        "My work includes dashboards, CRUD platforms, authentication systems, role-based applications, AI chatbot projects, and backend logic that solves real user needs. Currently expanding with .NET and ASP.NET.",
       location: "Pristina, Kosovo",
       university: "UBT · CS & Engineering",
       languages: "AL · EN (C1) · DE (B1) · SR (B1)",
@@ -71,7 +73,6 @@ const translations = {
     },
     footer: {
       rights: "All rights reserved.",
-      built: "Built with React & Tailwind CSS.",
     },
   },
   sq: {
@@ -88,7 +89,8 @@ const translations = {
       badge: "Student i Shkencave Kompjuterike · Zhvillues Full-Stack",
       headline1: "Ndërtoj",
       headline2: "aplikacione moderne",
-      headline3: "me logjikë të fortë backend, arkitekturë të pastër & UI të rafinuar.",
+      headline3:
+        "me logjikë të fortë backend, arkitekturë të pastër & UI të rafinuar.",
       sub: "Jam Getuar Jakupi — i fokusuar te React, Node.js, MySQL, MongoDB, sisteme autentikimi, API dhe projekte reale full-stack.",
       cta1: "Shiko Projektet",
       cta2: "Shkarko CV",
@@ -97,8 +99,10 @@ const translations = {
     about: {
       label: "Rreth Meje",
       heading: "Jo vetëm teori.\nZhvillim praktik real.",
-      card1: "Jam student i Shkencave Kompjuterike dhe Inxhinierisë në UBT, Prishtinë, me fokus të fortë në zhvillim full-stack. Ndërtoj aplikacione praktike duke përdorur React, Node.js, Express, MySQL, MongoDB dhe REST API.",
-      card2: "Puna ime përfshin panele kontrolli, platforma CRUD, sisteme autentikimi, aplikacione me role të ndryshme, projekte chatbot me AI dhe logjikë backend. Aktualisht po zgjeroj me .NET dhe ASP.NET.",
+      card1:
+        "Jam student i Shkencave Kompjuterike dhe Inxhinierisë në UBT, Prishtinë, me fokus të fortë në zhvillim full-stack. Ndërtoj aplikacione praktike duke përdorur React, Node.js, Express, MySQL, MongoDB dhe REST API.",
+      card2:
+        "Puna ime përfshin panele kontrolli, platforma CRUD, sisteme autentikimi, aplikacione me role të ndryshme, projekte chatbot me AI dhe logjikë backend. Aktualisht po zgjeroj me .NET dhe ASP.NET.",
       location: "Prishtinë, Kosovë",
       university: "UBT · Shkenca Kompjuterike",
       languages: "SHQ · EN (C1) · GJE (B1) · SRB (B1)",
@@ -144,7 +148,6 @@ const translations = {
     },
     footer: {
       rights: "Të gjitha të drejtat e rezervuara.",
-      built: "Ndërtuar me React & Tailwind CSS.",
     },
   },
 };

@@ -6,8 +6,45 @@ const SECTION_IDS = [
   "home", "about", "experience", "projects", "skills", "education", "certificates", "contact",
 ];
 
+function LanguageSwitch({ compact }) {
+  const { lang, setLang, t } = useLang();
+  return (
+    <div
+      role="group"
+      aria-label={t.nav.language}
+      className="inline-flex items-center rounded-full p-0.5"
+      style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
+    >
+      {[
+        { code: "en", label: "EN", aria: t.nav.languageEnglish },
+        { code: "sq", label: "SQ", aria: t.nav.languageAlbanian },
+      ].map((opt) => {
+        const isActive = lang === opt.code;
+        return (
+          <button
+            key={opt.code}
+            type="button"
+            onClick={() => setLang(opt.code)}
+            aria-pressed={isActive}
+            aria-label={opt.aria}
+            className={`rounded-full font-bold transition-all duration-200 ${compact ? "px-3.5 py-2 text-xs" : "px-3 py-1.5 text-xs"}`}
+            style={{
+              background: isActive ? "var(--accent)" : "transparent",
+              color: isActive ? "#fff" : "var(--ink-3)",
+              fontFamily: "'Syne', sans-serif",
+              minWidth: "2.5rem",
+            }}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Navbar() {
-  const { lang, toggle, t } = useLang();
+  const { t } = useLang();
   const { theme, toggle: toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -56,10 +93,6 @@ export default function Navbar() {
     { key: "certificates", href: "#certificates" },
     { key: "contact", href: "#contact" },
   ];
-
-  const switchLabel = lang === "en" ? "AL" : "EN";
-  const switchFlag = lang === "en" ? "🇦🇱" : "🇬🇧";
-  const switchAria = lang === "en" ? t.nav.switchToAlbanian : t.nav.switchToEnglish;
 
   return (
     <header
@@ -126,21 +159,10 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Lang toggle — shows target language */}
-          <button
-            onClick={toggle}
-            aria-label={switchAria}
-            className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold transition-all duration-200 hover:scale-105"
-            style={{
-              border: "1px solid var(--border)",
-              background: "var(--surface)",
-              color: "var(--accent-light)",
-              fontFamily: "'Syne', sans-serif",
-            }}
-          >
-            <span className="text-sm leading-none" aria-hidden="true">{switchFlag}</span>
-            {switchLabel}
-          </button>
+          {/* Language switch — desktop */}
+          <div className="hidden sm:block">
+            <LanguageSwitch />
+          </div>
 
           <a
             href="#contact"
@@ -200,20 +222,8 @@ export default function Navbar() {
               {t.nav[link.key]}
             </a>
           ))}
-          <div className="mt-3 flex items-center gap-3 px-4">
-            <button
-              onClick={toggle}
-              className="flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold"
-              style={{
-                border: "1px solid var(--border)",
-                background: "var(--surface)",
-                color: "var(--accent-light)",
-                fontFamily: "'Syne', sans-serif",
-              }}
-            >
-              <span aria-hidden="true">{switchFlag}</span>
-              {switchLabel === "AL" ? "Switch to Shqip" : "Switch to English"}
-            </button>
+          <div className="mt-3 flex items-center gap-3 px-4 sm:hidden">
+            <LanguageSwitch compact />
           </div>
         </div>
       </div>

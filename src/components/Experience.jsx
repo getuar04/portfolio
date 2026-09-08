@@ -6,7 +6,6 @@ function ExperienceCard({ item, lang, t, visible, delay }) {
   const role = lang === "sq" ? item.roleSq : item.role;
   const period = lang === "sq" ? item.periodSq : item.period;
   const summary = lang === "sq" ? item.summarySq : item.summary;
-  const highlights = lang === "sq" ? item.highlightsSq : item.highlights;
 
   return (
     <div className={`reveal ${visible ? "visible" : ""} reveal-delay-${delay} glass rounded-[24px] p-7 card-hover`}>
@@ -15,9 +14,11 @@ function ExperienceCard({ item, lang, t, visible, delay }) {
           <h3 className="text-lg font-bold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
             {role}
           </h3>
-          <p className="text-sm mt-1" style={{ color: "var(--accent-light)" }}>
-            {item.employer || (item.type === "current" ? "" : "")}
-          </p>
+          {item.employer && (
+            <p className="text-sm mt-1 font-medium" style={{ color: "var(--accent-light)" }}>
+              {item.employer}
+            </p>
+          )}
         </div>
         <span
           className="rounded-full px-3 py-1 text-xs font-medium shrink-0"
@@ -31,23 +32,35 @@ function ExperienceCard({ item, lang, t, visible, delay }) {
         </span>
       </div>
 
-      <p className="text-sm leading-7 mb-5" style={{ color: "var(--ink-2)" }}>
+      <p className="text-sm leading-7 mb-6" style={{ color: "var(--ink-2)" }}>
         {summary}
       </p>
 
-      {highlights?.length > 0 && (
-        <div className="mb-5">
-          <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: "var(--ink-5)" }}>
-            {t.experience.highlightsTitle}
-          </p>
-          <ul className="flex flex-col gap-2">
-            {highlights.map((h, i) => (
-              <li key={i} className="flex gap-2.5 text-sm leading-6" style={{ color: "var(--ink-2)" }}>
-                <span className="mt-2 h-1 w-1 rounded-full shrink-0" style={{ background: "var(--accent-light)" }} aria-hidden="true" />
-                {h}
-              </li>
-            ))}
-          </ul>
+      {item.sections?.length > 0 && (
+        <div className="grid md:grid-cols-2 gap-5 mb-6">
+          {item.sections.map((sec, si) => {
+            const secTitle = lang === "sq" ? sec.titleSq : sec.title;
+            const secItems = lang === "sq" ? sec.itemsSq : sec.items;
+            return (
+              <div
+                key={si}
+                className="rounded-[18px] p-5"
+                style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+              >
+                <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: "var(--accent-light)" }}>
+                  {secTitle}
+                </p>
+                <ul className="flex flex-col gap-2.5">
+                  {secItems.map((h, i) => (
+                    <li key={i} className="flex gap-2.5 text-sm leading-6" style={{ color: "var(--ink-2)" }}>
+                      <span className="mt-2 h-1 w-1 rounded-full shrink-0" style={{ background: "var(--accent-light)" }} aria-hidden="true" />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       )}
 

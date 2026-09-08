@@ -55,6 +55,19 @@ export default function Education() {
                 <p className="font-semibold text-sm text-white mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>{title}</p>
                 <p className="text-xs mb-2" style={{ color: "var(--accent-light)" }}>{tr.org}</p>
                 <p className="text-xs leading-5" style={{ color: "var(--ink-3)" }}>{note}</p>
+                {tr.topics?.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {tr.topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="rounded-full px-2 py-0.5 text-[10px] font-medium"
+                        style={{ background: "var(--surface-strong)", color: "var(--ink-3)", border: "1px solid var(--border)" }}
+                      >
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}

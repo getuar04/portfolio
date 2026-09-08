@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { LanguageProvider, useLang } from "./LanguageContext";
 
@@ -39,10 +39,26 @@ describe("LanguageContext", () => {
 
     await user.click(screen.getByText("toggle"));
 
-    expect(screen.getByTestId("lang")).toHaveTextContent("sq");
+    // The switch is intentionally deferred behind a brief fade transition.
+    await waitFor(() => expect(screen.getByTestId("lang")).toHaveTextContent("sq"));
     expect(screen.getByTestId("label")).toHaveTextContent("Rreth Meje");
     expect(document.documentElement.lang).toBe("sq");
     expect(window.localStorage.getItem("gj-lang")).toBe("sq");
+  });
+
+  it("ignores a repeated click while a transition is already in flight", async () => {
+    const user = userEvent.setup();
+    render(
+      <LanguageProvider>
+        <Consumer />
+      </LanguageProvider>
+    );
+
+    const btn = screen.getByText("toggle");
+    await user.click(btn);
+    await user.click(btn); // should be a no-op while fading
+
+    await waitFor(() => expect(screen.getByTestId("lang")).toHaveTextContent("sq"));
   });
 
   it("restores the persisted language on next mount", () => {

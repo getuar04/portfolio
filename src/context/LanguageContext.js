@@ -16,29 +16,36 @@ const translations = {
       closeMenu: "Close menu",
       switchToAlbanian: "Switch to Albanian",
       switchToEnglish: "Switch to English",
+      languageEnglish: "English",
+      languageAlbanian: "Shqip",
+      language: "Language",
     },
     hero: {
       badge: "Backend Developer",
       headline1: "Building",
       headline2: "secure backend systems",
       headline3: "with clean architecture, real APIs & production discipline.",
-      sub: "I'm Getuar Jakupi — a Backend Developer building secure, maintainable, and scalable services and APIs with Node.js and TypeScript, with full-stack capability across React, MySQL, and MongoDB.",
+      sub: "I'm Getuar Jakupi, a Backend Developer building secure and maintainable services with Node.js and TypeScript, with additional experience in full-stack development and recommendation-focused Machine Learning.",
       cta1: "View Projects",
       cta2: "Download CV",
       cta3: "Contact Me",
       status: "Currently Building",
+      labelBuilding: "Currently Building",
+      labelComingSoon: "Coming Soon",
+      labelFeatured: "Featured Project",
+      labelRecent: "Recent Project",
       statBackend: "Backend",
       statFullstack: "Full-Stack",
       statFrontend: "Frontend",
-      statLatest: "Latest",
+      statInDev: "In Development",
     },
     about: {
       label: "About Me",
       heading: "Backend-focused.\nBuilt on real practice.",
       card1:
-        "I'm a Backend Developer focused primarily on Node.js and TypeScript, building secure APIs and backend services. I work with relational and NoSQL databases, and I'm comfortable with authentication, authorisation, distributed systems, containerisation, CI/CD, testing, and Clean Architecture.",
+        "I focus on backend development with Node.js and TypeScript, building secure APIs, authentication flows, database integrations, and maintainable services.",
       card2:
-        "I can also work across the stack with React when a project needs frontend integration. I value security, reliability, maintainability, and clear architecture — and I'm currently looking for a serious full-time engineering opportunity where I can keep building on that foundation.",
+        "I also work across React-based frontends, DevOps workflows, data projects, and recommendation-focused Machine Learning when the project requires broader full-stack capability.",
       location: "Pristina, Kosovo",
       university: "UBT · CS & Engineering",
       languages: "AL · EN (C1) · DE (B1) · SR (B1)",
@@ -71,25 +78,34 @@ const translations = {
         backend: "Backend",
         fullstack: "Full Stack",
         frontend: "Frontend",
+        dataScience: "Data Science",
+        ml: "Machine Learning",
+        computerVision: "Computer Vision",
+        automation: "Automation",
         university: "University",
         professional: "Professional",
         research: "Research",
+        inDevelopment: "In Development",
       },
       status: {
         research: "Academic Research",
         private: "Private Professional Project",
         caseStudy: "Case Study",
         wip: "In Progress",
+        comingSoon: "Coming Soon",
         live: "Live Demo",
         source: "Source Available",
         completed: "Completed",
       },
       featuredTag: "Featured",
-      viewGithub: "GitHub",
+      viewGithub: "Source Code",
+      viewGithubModal: "View on GitHub",
       viewLive: "Live Demo",
       viewScreenshots: "Screenshots",
-      presentation: "Presentation",
+      presentation: "Project Presentation",
       private: "Private",
+      privateRepo: "Private Repository",
+      privateRepoTooltip: "Repository is currently private",
       viewDetails: "View Details",
       empty: "No projects match this filter yet.",
       modal: {
@@ -102,6 +118,7 @@ const translations = {
         status: "Status",
         team: "Team",
         context: "Context",
+        resources: "Resources",
         close: "Close",
       },
     },
@@ -162,29 +179,36 @@ const translations = {
       closeMenu: "Mbyll menynë",
       switchToAlbanian: "Kalo në Shqip",
       switchToEnglish: "Kalo në Anglisht",
+      languageEnglish: "English",
+      languageAlbanian: "Shqip",
+      language: "Gjuha",
     },
     hero: {
       badge: "Zhvillues Backend",
       headline1: "Ndërtoj",
       headline2: "sisteme backend të sigurta",
       headline3: "me arkitekturë të pastër, API reale & disiplinë prodhimi.",
-      sub: "Jam Getuar Jakupi — Zhvillues Backend që ndërton shërbime dhe API të sigurta, të mirëmbajtshme dhe të shkallëzueshme me Node.js dhe TypeScript, me aftësi full-stack në React, MySQL dhe MongoDB.",
+      sub: "Jam Getuar Jakupi, Zhvillues Backend që ndërtoj shërbime të sigurta dhe të mirëmbajtshme me Node.js dhe TypeScript, me përvojë shtesë në full-stack dhe Machine Learning për sisteme rekomanduese.",
       cta1: "Shiko Projektet",
       cta2: "Shkarko CV",
       cta3: "Më Kontakto",
       status: "Aktualisht Duke Ndërtuar",
+      labelBuilding: "Aktualisht Duke Ndërtuar",
+      labelComingSoon: "Së Shpejti",
+      labelFeatured: "Projekt i Veçuar",
+      labelRecent: "Projekti i Fundit",
       statBackend: "Backend",
       statFullstack: "Full-Stack",
       statFrontend: "Frontend",
-      statLatest: "Më i Fundit",
+      statInDev: "Në Zhvillim",
     },
     about: {
       label: "Rreth Meje",
       heading: "I fokusuar në backend.\nI ndërtuar mbi praktikë reale.",
       card1:
-        "Jam Zhvillues Backend i fokusuar kryesisht në Node.js dhe TypeScript, duke ndërtuar API dhe shërbime backend të sigurta. Punoj me baza të dhënash relacionale dhe NoSQL, dhe jam i rehatshëm me autentikim, autorizim, sisteme të shpërndara, kontenerizim, CI/CD, testim dhe Clean Architecture.",
+        "Fokusohem në zhvillimin backend me Node.js dhe TypeScript, duke ndërtuar API të sigurta, autentikim, integrime me databaza dhe shërbime të mirëmbajtshme.",
       card2:
-        "Mund të punoj gjithashtu në të gjithë stack-un me React kur një projekt ka nevojë për integrim frontend. Vlerësoj sigurinë, besueshmërinë, mirëmbajtshmërinë dhe arkitekturën e qartë — dhe aktualisht jam duke kërkuar një mundësi serioze inxhinierike me kohë të plotë ku mund të vazhdoj të ndërtoj mbi këtë bazë.",
+        "Punoj gjithashtu me frontend React, procese DevOps, projekte me të dhëna dhe Machine Learning për sisteme rekomanduese kur projekti kërkon aftësi më të gjera full-stack.",
       location: "Prishtinë, Kosovë",
       university: "UBT · Shkenca Kompjuterike",
       languages: "SHQ · EN (C1) · GJE (B1) · SRB (B1)",
@@ -217,25 +241,34 @@ const translations = {
         backend: "Backend",
         fullstack: "Full Stack",
         frontend: "Frontend",
+        dataScience: "Data Science",
+        ml: "Machine Learning",
+        computerVision: "Computer Vision",
+        automation: "Automatizim",
         university: "Universitare",
         professional: "Profesionale",
         research: "Kërkim",
+        inDevelopment: "Në Zhvillim",
       },
       status: {
         research: "Kërkim Akademik",
         private: "Projekt Privat Profesional",
         caseStudy: "Rast Studimi",
         wip: "Në Progres",
+        comingSoon: "Së Shpejti",
         live: "Demo Live",
         source: "Kodi i Disponueshëm",
         completed: "I Përfunduar",
       },
       featuredTag: "I Veçantë",
-      viewGithub: "GitHub",
+      viewGithub: "Kodi Burimor",
+      viewGithubModal: "Shiko në GitHub",
       viewLive: "Demo Live",
       viewScreenshots: "Pamje",
-      presentation: "Prezantimi",
+      presentation: "Prezantimi i Projektit",
       private: "Privat",
+      privateRepo: "Repository Privat",
+      privateRepoTooltip: "Repository aktualisht është privat",
       viewDetails: "Shiko Detajet",
       empty: "Ende nuk ka projekte për këtë filtër.",
       modal: {
@@ -248,6 +281,7 @@ const translations = {
         status: "Statusi",
         team: "Ekipi",
         context: "Konteksti",
+        resources: "Burimet",
         close: "Mbyll",
       },
     },
@@ -309,8 +343,14 @@ function getInitialLang() {
   return "en";
 }
 
+const TRANSITION_MS = 180;
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(getInitialLang);
+  const [lang, setLangState] = useState(getInitialLang);
+  const [fading, setFading] = useState(false);
   const t = translations[lang];
 
   useEffect(() => {
@@ -324,10 +364,25 @@ export function LanguageProvider({ children }) {
     }
   }, [lang]);
 
-  const toggle = () => setLang((l) => (l === "en" ? "sq" : "en"));
+  // Guarded so rapid repeated clicks can't stack/overlap the fade and break it.
+  const changeLang = (next) => {
+    if (fading || lang === next) return;
+    if (prefersReducedMotion()) {
+      setLangState(next);
+      return;
+    }
+    setFading(true);
+    window.setTimeout(() => {
+      setLangState(next);
+      window.setTimeout(() => setFading(false), TRANSITION_MS);
+    }, TRANSITION_MS);
+  };
+
+  const setLang = (next) => changeLang(next);
+  const toggle = () => changeLang(lang === "en" ? "sq" : "en");
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggle, t }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggle, fading, t }}>
       {children}
     </LanguageContext.Provider>
   );

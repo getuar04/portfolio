@@ -53,16 +53,16 @@ export default function About() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-6">
-          {/* Cards col */}
+        <div className="grid lg:grid-cols-5 gap-6 lg:items-stretch">
+          {/* Cards col — both cards flex to evenly fill the height of the taller info column */}
           <div className="lg:col-span-3 flex flex-col gap-4">
-            <div className={`reveal ${visible ? "visible" : ""} reveal-delay-1 glass rounded-[24px] p-7 card-hover`}>
-              <p className="text-base leading-8" style={{ color: "var(--ink-2)" }}>
+            <div className={`reveal ${visible ? "visible" : ""} reveal-delay-1 glass rounded-[24px] p-7 card-hover flex-1 flex flex-col justify-center`}>
+              <p className="text-base sm:text-lg leading-8" style={{ color: "var(--ink-2)" }}>
                 {t.about.card1}
               </p>
             </div>
-            <div className={`reveal ${visible ? "visible" : ""} reveal-delay-2 glass rounded-[24px] p-7 card-hover`}>
-              <p className="text-base leading-8" style={{ color: "var(--ink-2)" }}>
+            <div className={`reveal ${visible ? "visible" : ""} reveal-delay-2 glass rounded-[24px] p-7 card-hover flex-1 flex flex-col justify-center`}>
+              <p className="text-base sm:text-lg leading-8" style={{ color: "var(--ink-2)" }}>
                 {t.about.card2}
               </p>
             </div>

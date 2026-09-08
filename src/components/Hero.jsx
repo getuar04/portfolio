@@ -3,32 +3,66 @@ import { useLang } from "../context/LanguageContext";
 import profile from "../data/profile";
 import projects from "../data/projects";
 
+// Single source of truth for the Hero technology carousel. Evaluation
+// metrics (F1, AUC, NDCG@10, ...) never belong here — only technologies.
 const STACK_MARQUEE = [
-  "Node.js", "TypeScript", "Express", "PostgreSQL", "MongoDB", "Redis",
-  "Docker", "Kubernetes", "React", "JWT",
+  "Node.js", "TypeScript", "Express.js", "REST APIs", "PostgreSQL", "MongoDB",
+  "Redis", "Kafka", "NATS", "Docker", "Docker Compose", "Kubernetes",
+  "Jenkins CI/CD", "JWT", "RBAC", "Two-Factor Authentication", "Clean Architecture",
+  "Python", "FastAPI", "React", "Next.js", "Git/GitHub",
 ];
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+// In-development / coming-soon projects lead the rotation, then featured
+// completed work — read entirely from the shared project-data array.
+function buildRotation(lang) {
+  const inDev = projects
+    .filter((p) => p.completionStatus !== "completed")
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+  const featuredDone = projects
+    .filter((p) => p.featured && p.completionStatus === "completed")
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+  const combined = [...inDev, ...featuredDone].slice(0, 7);
+  return combined.map((p) => ({
+    id: p.id,
+    name: lang === "sq" ? p.titleSq : p.title,
+    completionStatus: p.completionStatus,
+    featured: p.featured,
+    isLatestYear: p.year === String(Math.max(...projects.map((x) => parseInt(x.year, 10)))),
+  }));
+}
 
 export default function Hero() {
   const { lang, t } = useLang();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
 
-  const featuredProjects = useMemo(
-    () =>
-      projects
-        .filter((p) => p.featured)
-        .sort((a, b) => a.displayOrder - b.displayOrder)
-        .map((p) => (lang === "sq" ? p.titleSq : p.title)),
-    [lang]
-  );
+  useEffect(() => {
+    const mql = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    if (!mql) return;
+    const onChange = () => setReducedMotion(mql.matches);
+    mql.addEventListener ? mql.addEventListener("change", onChange) : mql.addListener(onChange);
+    return () => {
+      mql.removeEventListener ? mql.removeEventListener("change", onChange) : mql.removeListener(onChange);
+    };
+  }, []);
+
+  const rotation = useMemo(() => buildRotation(lang), [lang]);
+  // Calm-but-unmistakable speed: scales with the list so future additions
+  // don't make it feel rushed or drag on forever.
+  const marqueeDuration = `${(STACK_MARQUEE.length * 1.2).toFixed(1)}s`;
 
   const stats = useMemo(() => {
     const count = (tag) => projects.filter((p) => p.filters.includes(tag)).length;
-    const latestYear = Math.max(...projects.map((p) => parseInt(p.year, 10)));
+    const inDevCount = projects.filter((p) => p.completionStatus !== "completed").length;
     return [
       { val: String(count("backend")), label: t.hero.statBackend },
       { val: String(count("fullstack")), label: t.hero.statFullstack },
-      { val: String(latestYear), label: t.hero.statLatest },
+      { val: String(inDevCount), label: t.hero.statInDev },
     ];
   }, [t]);
 
@@ -37,20 +71,41 @@ export default function Hero() {
   }, [lang]);
 
   useEffect(() => {
+    let paused = document.hidden;
+    const onVisibility = () => {
+      paused = document.hidden;
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     const interval = setInterval(() => {
+      if (paused || rotation.length < 2) return;
       setFade(false);
       setTimeout(() => {
-        setCurrentIndex((i) => (i + 1) % featuredProjects.length);
+        setCurrentIndex((i) => (i + 1) % rotation.length);
         setFade(true);
-      }, 300);
-    }, 2800);
-    return () => clearInterval(interval);
-  }, [featuredProjects.length]);
+      }, 260);
+    }, 3200);
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [rotation.length]);
+
+  const current = rotation[currentIndex] || rotation[0];
+  const heroLabel = !current
+    ? t.hero.status
+    : current.completionStatus === "coming-soon"
+    ? t.hero.labelComingSoon
+    : current.completionStatus === "in-progress"
+    ? t.hero.labelBuilding
+    : current.isLatestYear
+    ? t.hero.labelRecent
+    : t.hero.labelFeatured;
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center pt-16 overflow-hidden grid-bg"
+      className="hero-viewport relative flex items-center pt-16 overflow-hidden"
     >
       {/* Background orbs */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
@@ -70,13 +125,13 @@ export default function Hero() {
         />
       </div>
 
-      <div className="wrap w-full py-16 sm:py-20">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="wrap w-full py-6 sm:py-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           {/* LEFT */}
           <div className="order-2 lg:order-1">
             {/* Badge */}
             <div
-              className="reveal visible inline-flex items-center gap-2 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-medium mb-6 sm:mb-8"
+              className="reveal visible inline-flex items-center gap-2 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-medium mb-3 sm:mb-4"
               style={{
                 border: "1px solid rgba(124,58,237,0.3)",
                 background: "rgba(124,58,237,0.08)",
@@ -89,10 +144,10 @@ export default function Hero() {
 
             {/* Headline */}
             <h1
-              className="reveal visible reveal-delay-1 font-black leading-[1.05] mb-5 sm:mb-6"
+              className="reveal visible reveal-delay-1 font-black leading-[1.04] mb-2 sm:mb-3"
               style={{
                 fontFamily: "'Syne', sans-serif",
-                fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
+                fontSize: "clamp(1.9rem, 4.4vw, 3.25rem)",
               }}
             >
               {t.hero.headline1}{" "}
@@ -101,7 +156,7 @@ export default function Hero() {
               <span
                 className="font-semibold"
                 style={{
-                  fontSize: "clamp(1.1rem, 3vw, 2rem)",
+                  fontSize: "clamp(0.95rem, 2.1vw, 1.4rem)",
                   color: "var(--ink-4)",
                 }}
               >
@@ -111,14 +166,14 @@ export default function Hero() {
 
             {/* Sub */}
             <p
-              className="reveal visible reveal-delay-2 text-sm sm:text-base lg:text-lg leading-7 sm:leading-8 mb-8 sm:mb-10 max-w-xl"
+              className="reveal visible reveal-delay-2 text-sm sm:text-base leading-6 mb-4 sm:mb-5 max-w-xl"
               style={{ color: "var(--ink-2)" }}
             >
               {t.hero.sub}
             </p>
 
             {/* CTAs */}
-            <div className="reveal visible reveal-delay-3 flex flex-wrap gap-3 mb-8 sm:mb-10">
+            <div className="reveal visible reveal-delay-3 flex flex-wrap gap-3 mb-4 sm:mb-5">
               <a href="#projects" className="btn-primary" style={{ fontFamily: "'Syne', sans-serif" }}>
                 {t.hero.cta1}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -190,60 +245,104 @@ export default function Hero() {
               }}
             >
               {/* Header */}
-              <div className="flex items-center justify-between mb-5">
-                <div className="min-w-0 flex-1 pr-3">
-                  <p className="text-xs mb-1" style={{ color: "var(--ink-4)" }}>
-                    {t.hero.status}
+              <div className="flex items-center justify-between mb-4 gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs mb-1.5" style={{ color: "var(--ink-4)" }}>
+                    {heroLabel}
                   </p>
-                  <p
-                    className="font-semibold text-white text-sm sm:text-base truncate transition-opacity duration-300"
-                    style={{ fontFamily: "'Syne', sans-serif", opacity: fade ? 1 : 0 }}
-                  >
-                    {featuredProjects[currentIndex]}
-                  </p>
+                  <div style={{ minHeight: "2.6em" }} className="overflow-hidden">
+                    <p
+                      className="font-semibold text-white text-sm sm:text-base leading-snug transition-all duration-300"
+                      style={{
+                        fontFamily: "'Syne', sans-serif",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        opacity: fade ? 1 : 0,
+                        transform: fade ? "translateY(0)" : "translateY(6px)",
+                      }}
+                    >
+                      {current?.name}
+                    </p>
+                  </div>
                 </div>
                 <div className="h-2.5 w-2.5 rounded-full bg-emerald-400 status-dot shrink-0" aria-hidden="true" />
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-5">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
                 {stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="rounded-xl sm:rounded-2xl p-2.5 sm:p-3 text-center"
+                    className="rounded-xl sm:rounded-2xl p-2 sm:p-3 text-center min-w-0"
                     style={{ background: "var(--surface-strong)", border: "1px solid var(--border)" }}
                   >
-                    <p className="text-lg sm:text-xl font-black mb-0.5 grad-text" style={{ fontFamily: "'Syne', sans-serif" }}>
+                    <p
+                      className="font-black mb-0.5 grad-text"
+                      style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(1rem, 4vw, 1.25rem)" }}
+                    >
                       {stat.val}
                     </p>
-                    <p className="text-[9px] sm:text-[10px]" style={{ color: "var(--ink-5)" }}>
+                    <p className="text-[9px] sm:text-[10px] leading-tight" style={{ color: "var(--ink-5)" }}>
                       {stat.label}
                     </p>
                   </div>
                 ))}
               </div>
 
-              {/* Stack marquee */}
-              <div
-                className="overflow-hidden rounded-xl py-2.5 sm:py-3"
-                style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
-              >
-                <div className="marquee-track flex gap-3 sm:gap-4 w-max">
-                  {[...STACK_MARQUEE, ...STACK_MARQUEE].map((tech, i) => (
-                    <span
-                      key={i}
-                      className="text-xs px-2.5 sm:px-3 py-1 rounded-full shrink-0"
-                      style={{
-                        background: "rgba(124,58,237,0.15)",
-                        color: "var(--accent-light)",
-                        border: "1px solid rgba(124,58,237,0.2)",
-                      }}
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              {/* Stack marquee — real continuous loop; a readable static wrap under reduced motion */}
+              {reducedMotion ? (
+                <div
+                  className="overflow-hidden rounded-xl py-2.5 sm:py-3 px-2.5"
+                  role="list"
+                  aria-label="Core technologies"
+                  style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+                >
+                  <div className="flex flex-wrap gap-2">
+                    {STACK_MARQUEE.map((tech) => (
+                      <span
+                        key={tech}
+                        role="listitem"
+                        className="text-xs px-2.5 sm:px-3 py-1 rounded-full shrink-0"
+                        style={{
+                          background: "rgba(124,58,237,0.15)",
+                          color: "var(--accent-light)",
+                          border: "1px solid rgba(124,58,237,0.2)",
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div
+                  className="marquee-viewport overflow-hidden rounded-xl py-2.5 sm:py-3"
+                  tabIndex={0}
+                  role="list"
+                  aria-label="Core technologies, scrolling continuously"
+                  style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+                >
+                  <div className="marquee-track flex gap-3 sm:gap-4 w-max" style={{ animationDuration: marqueeDuration }}>
+                    {[...STACK_MARQUEE, ...STACK_MARQUEE].map((tech, i) => (
+                      <span
+                        key={i}
+                        role="listitem"
+                        aria-hidden={i >= STACK_MARQUEE.length ? "true" : undefined}
+                        className="text-xs px-2.5 sm:px-3 py-1 rounded-full shrink-0"
+                        style={{
+                          background: "rgba(124,58,237,0.15)",
+                          color: "var(--accent-light)",
+                          border: "1px solid rgba(124,58,237,0.2)",
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -267,9 +366,6 @@ export default function Hero() {
           0% { transform: translateY(-100%); opacity: 0; }
           50% { opacity: 1; }
           100% { transform: translateY(200%); opacity: 0; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .grid-bg [style*="scrollDown"] { animation: none !important; }
         }
       `}</style>
     </section>

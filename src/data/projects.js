@@ -1,22 +1,225 @@
 // Data-driven project catalogue.
 //
 // Status model:
-//   completionStatus  — "completed" | "in-progress"
-//   repositoryStatus  — "public" | "private" | "unavailable"
+//   completionStatus     — "completed" | "in-progress" | "coming-soon"
+//   repositoryStatus     — "public" | "private" | "unavailable" (legacy status-badge input)
+//   repositoryVisibility — "public" | "private" (authoritative for the visibility badge/tooltip
+//                          next to the repo button; independent of completionStatus — a repo can
+//                          be private while the project itself is Completed, and vice versa)
 //   demoStatus        — "live" | "unavailable"
 //   context           — "professional" | "university" | "personal" | "research"
 //   filters           — tags used by the Projects filter bar:
 //                        "featured" | "backend" | "fullstack" | "frontend" |
+//                        "dataScience" | "ml" | "computerVision" | "automation" |
 //                        "university" | "professional" | "research"
+//                        ("inDevelopment" is derived from completionStatus, not stored here)
 //
 // Only verified information is included. Fields with nothing truthful to show
 // (challenges, outcomes, futureExtensions, contributions, screenshots, etc.)
 // are simply omitted rather than filled with placeholders.
+//
+// Verification note (2026 update): balkan-air-quality-analysis, prishtina-traffic-counter,
+// arka-pos, crawl (E-commerce Product Data Crawler), and invations (Digital Invitation
+// Platform) live at github.com/getuar04/<name>. The project owner has confirmed these exact
+// URLs are final and intentional — the repositories are currently private and will be made
+// public later, so the GitHub buttons are shown as active regardless of live reachability.
+// Only the technology facts explicitly supplied for this update are published for them;
+// nothing beyond that was inferred. quiz-management was independently verified (README +
+// frontend/package.json) and was already public.
 
 const projects = [
   // ---------------------------------------------------------------------
   // FEATURED
   // ---------------------------------------------------------------------
+  {
+    id: "arka-pos",
+    title: "ARKA — POS & Business Management System",
+    titleSq: "ARKA — Sistem POS dhe Menaxhimi Biznesi",
+    category: "Full-Stack / Business",
+    categorySq: "Full-Stack / Biznes",
+    context: "personal",
+    filters: ["featured", "fullstack"],
+    featured: true,
+    completionStatus: "coming-soon",
+    repositoryStatus: "private",
+    repositoryVisibility: "private",
+    demoStatus: "unavailable",
+    shortDescription:
+      "A modern POS and business-management platform in development for retail shops and hospitality businesses in Kosovo.",
+    shortDescriptionSq:
+      "Platformë moderne POS dhe menaxhimi biznesi në zhvillim për markete dhe biznese të gastronomisë në Kosovë.",
+    fullDescription:
+      "ARKA is a modern POS and business-management platform in development for retail shops and hospitality businesses in Kosovo. It is designed around separate market and café workflows, secure role-based access, inventory and order management, and future electronic fiscalisation integration.",
+    fullDescriptionSq:
+      "ARKA është një platformë moderne POS dhe menaxhimi biznesi në zhvillim për markete dhe biznese të gastronomisë në Kosovë. Sistemi është projektuar me rrjedha të ndara për markete dhe kafiteri, role të sigurta, menaxhim të stokut dhe porosive, si dhe integrim të ardhshëm me fiskalizimin elektronik.",
+    stack: [],
+    futureExtensions: [
+      "Electronic fiscalisation integration — architecture prepared for future Kosovo SEF integration; not yet operational or certified.",
+    ],
+    futureExtensionsSq: [
+      "Integrim me fiskalizimin elektronik — arkitektura e përgatitur për integrim të ardhshëm me SEF në Kosovë; ende jo operacionale apo e certifikuar.",
+    ],
+    note: "In development. Not yet certified, legally compliant, or connected to a production fiscalisation system — shown here as work in progress only.",
+    noteSq: "Në zhvillim. Ende nuk është e certifikuar, e pajtueshme ligjërisht, apo e lidhur me një sistem fiskalizimi në prodhim — paraqitet vetëm si punë në vazhdim.",
+    github: "https://github.com/getuar04/arka-pos",
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2026",
+    displayOrder: 1,
+  },
+  {
+    id: "resource-booking-system",
+    title: "Smart Resource Booking System",
+    titleSq: "Smart Resource Booking System",
+    category: "Full-Stack / Microservices",
+    categorySq: "Full-Stack / Mikroshërbime",
+    context: "university",
+    filters: ["featured", "fullstack", "university"],
+    featured: true,
+    completionStatus: "completed",
+    repositoryStatus: "unavailable",
+    demoStatus: "unavailable",
+    shortDescription:
+      "A full-stack resource-booking platform built with a microservices-oriented architecture and an API Gateway.",
+    shortDescriptionSq:
+      "Platformë full-stack për rezervim burimesh, ndërtuar me arkitekturë të orientuar nga mikroshërbimet dhe API Gateway.",
+    fullDescription:
+      "Smart Resource Booking System is a full-stack resource-booking platform built with a microservices-oriented architecture. The system separates authentication, resource management, and booking functionality into backend services connected through an API Gateway. It includes JWT authentication, role-based authorisation, MongoDB persistence, RESTful CRUD operations, Docker Compose containerisation, and Jenkins CI/CD automation.",
+    fullDescriptionSq:
+      "Smart Resource Booking System është një platformë full-stack për rezervimin e burimeve, ndërtuar me arkitekturë të orientuar nga mikroshërbimet. Sistemi ndan autentikimin, menaxhimin e burimeve dhe funksionalitetin e rezervimit në shërbime backend të lidhura përmes një API Gateway. Përfshin autentikim JWT, autorizim bazuar në role, ruajtje të dhënash në MongoDB, operacione CRUD RESTful, kontenerizim me Docker Compose dhe automatizim Jenkins CI/CD.",
+    stack: [
+      "React", "Node.js", "Express.js", "MongoDB", "JWT", "REST API",
+      "Microservices", "API Gateway", "Docker", "Docker Compose", "Jenkins CI/CD", "Git", "GitHub",
+    ],
+    futureExtensions: [
+      "Kafka for event-driven communication between services",
+      "Kubernetes for orchestration",
+      "Redis for caching",
+      "Prometheus and Grafana for observability",
+    ],
+    futureExtensionsSq: [
+      "Kafka për komunikim event-driven mes shërbimeve",
+      "Kubernetes për orkestrim",
+      "Redis për caching",
+      "Prometheus dhe Grafana për observability",
+    ],
+    architecture:
+      "The architecture was designed with room for future event-driven communication, orchestration, caching, and observability extensions — these were not part of the completed implementation.",
+    architectureSq:
+      "Arkitektura u projektua me hapësirë për zgjerime të ardhshme në komunikim event-driven, orkestrim, caching dhe observability — këto nuk ishin pjesë e implementimit të përfunduar.",
+    github: null,
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2026",
+    displayOrder: 2,
+  },
+  {
+    id: "balkan-air-quality-analysis",
+    title: "Balkan Air Quality Analysis",
+    titleSq: "Analiza e Cilësisë së Ajrit në Ballkan",
+    category: "Data Science / ML",
+    categorySq: "Data Science / ML",
+    context: "personal",
+    filters: ["featured", "dataScience", "ml"],
+    featured: true,
+    completionStatus: "completed",
+    repositoryStatus: "private",
+    repositoryVisibility: "private",
+    demoStatus: "unavailable",
+    shortDescription:
+      "An end-to-end Python data science project analysing air pollution trends across Balkan countries, with forecasting and an interactive dashboard.",
+    shortDescriptionSq:
+      "Projekt end-to-end në Python për analizimin e trendeve të ndotjes së ajrit në vende të Ballkanit, me parashikime dhe dashboard interaktiv.",
+    fullDescription:
+      "An end-to-end Python data science project analysing air pollution trends across ten Balkan countries from 2019 to 2024. The workflow covers data cleaning and integration, statistical analysis, professional static and interactive visualisations, forecasting experiments extending to 2030, and an interactive Streamlit dashboard with dynamic filters. The 2030 figures are a model-based forecasting experiment, not a guaranteed environmental prediction.",
+    fullDescriptionSq:
+      "Projekt end-to-end në Python për analizimin e trendeve të ndotjes së ajrit në dhjetë vende të Ballkanit gjatë periudhës 2019–2024. Projekti përfshin pastrimin dhe integrimin e të dhënave, analizën statistikore, vizualizime statike dhe interaktive, eksperimente parashikuese deri në vitin 2030 dhe dashboard interaktiv me Streamlit. Vlerat për 2030 janë një eksperiment parashikues i bazuar në model, jo një parashikim mjedisor i garantuar.",
+    stack: ["Python", "Data Cleaning", "Statistical Analysis", "Data Visualisation", "Forecasting", "Streamlit"],
+    note: "The description above reflects the scope as supplied by the project owner and was not independently source-verified for this update.",
+    noteSq: "Përshkrimi më sipër pasqyron fushëveprimin siç është dhënë nga pronari i projektit dhe nuk u verifikua në mënyrë të pavarur nga burimi për këtë përditësim.",
+    github: "https://github.com/getuar04/balkan-air-quality-analysis",
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2026",
+    displayOrder: 3,
+  },
+  {
+    id: "prishtina-traffic-counter",
+    title: "Prishtina Traffic Counter",
+    titleSq: "Numëruesi i Trafikut në Prishtinë",
+    category: "Computer Vision",
+    categorySq: "Computer Vision",
+    context: "personal",
+    filters: ["featured", "computerVision"],
+    featured: true,
+    completionStatus: "completed",
+    repositoryStatus: "private",
+    repositoryVisibility: "private",
+    demoStatus: "unavailable",
+    shortDescription:
+      "A computer-vision traffic analysis project that detects and counts vehicles crossing a defined road area from a camera feed.",
+    shortDescriptionSq:
+      "Projekt për analizimin e trafikut me computer vision, që identifikon dhe numëron automjetet që kalojnë në një zonë të përcaktuar të rrugës.",
+    fullDescription:
+      "A computer-vision traffic analysis project that processes an urban camera feed, detects vehicles crossing a defined road area, counts traffic, and separates supported vehicle classes such as cars, buses, and trucks.",
+    fullDescriptionSq:
+      "Projekt për analizimin e trafikut me computer vision, i cili përpunon pamje nga një kamerë urbane, identifikon automjetet që kalojnë në një zonë të përcaktuar të rrugës, numëron trafikun dhe ndan kategoritë e mbështetura si vetura, autobusë dhe kamionë.",
+    stack: ["Python", "Computer Vision", "Vehicle Detection", "Traffic Counting"],
+    note: "The specific detection model, tracking approach, and library choice (e.g. OpenCV/YOLO) were not source-verified for this update, so they are intentionally not listed.",
+    noteSq: "Modeli specifik i detektimit, qasja e tracking-ut dhe libraria e përdorur (p.sh. OpenCV/YOLO) nuk u verifikuan nga burimi për këtë përditësim, prandaj qëllimisht nuk janë listuar.",
+    github: "https://github.com/getuar04/prishtina-traffic-counter",
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2026",
+    displayOrder: 4,
+  },
+  {
+    id: "quiz-management",
+    title: "Quiz Management System",
+    titleSq: "Sistemi për Menaxhimin e Kuizeve",
+    category: "Full-Stack / Education",
+    categorySq: "Full-Stack / Edukim",
+    context: "personal",
+    filters: ["featured", "fullstack"],
+    featured: true,
+    completionStatus: "completed",
+    repositoryStatus: "public",
+    repositoryVisibility: "public",
+    demoStatus: "unavailable",
+    shortDescription:
+      "Full-stack quiz-management platform with secure access/refresh-token authentication, role-based permissions, and automatic scoring.",
+    shortDescriptionSq:
+      "Platformë full-stack për menaxhimin e kuizeve me autentikim të sigurt, role të ndara dhe vlerësim automatik.",
+    fullDescription:
+      "Full-stack quiz-management platform with a REST API, secure access and refresh-token authentication, role-based permissions for administrators, teachers, and students, quiz and question management, assignments, submissions, automatic scoring, and duplicate-attempt prevention.",
+    fullDescriptionSq:
+      "Platformë full-stack për menaxhimin e kuizeve me REST API, autentikim të sigurt me access dhe refresh tokens, role të ndara për administratorë, mësues dhe studentë, menaxhim të kuizeve dhe pyetjeve, caktim të kuizeve, dorëzim të përgjigjeve, vlerësim automatik dhe parandalim të tentimeve të dyfishta.",
+    stack: ["Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "bcrypt", "React", "TypeScript", "Vite", "Tailwind CSS", "Axios"],
+    implementedFeatures: [
+      "JWT authentication with refresh-token rotation, stored in an HTTP-only cookie",
+      "Admin, Teacher, and Student roles with protected routes and user activation/deactivation",
+      "Quiz creation, editing, deletion, publishing, and assignment; MCQ question management",
+      "Student submissions with automatic scoring, ownership validation, and duplicate-attempt prevention",
+    ],
+    implementedFeaturesSq: [
+      "Autentikim JWT me rotullim refresh-token, ruajtur në HTTP-only cookie",
+      "Role Admin, Mësues dhe Student me rrugë të mbrojtura dhe aktivizim/çaktivizim përdoruesish",
+      "Krijim, editim, fshirje, publikim dhe caktim kuizesh; menaxhim pyetjesh MCQ",
+      "Dorëzime studentësh me vlerësim automatik, validim pronësie dhe parandalim tentimesh të dyfishta",
+    ],
+    note: "The frontend is built with React, TypeScript, Vite, Tailwind CSS, and Axios — confirmed directly from the repository's frontend/package.json (the project README references Bootstrap, but the actual dependency file does not include it, so Bootstrap is intentionally not listed here).",
+    noteSq: "Frontend-i është ndërtuar me React, TypeScript, Vite, Tailwind CSS dhe Axios — konfirmuar drejtpërdrejt nga frontend/package.json i repozitorit (README-ja e projektit përmend Bootstrap, por skedari aktual i varësive nuk e përfshin, prandaj Bootstrap qëllimisht nuk është listuar këtu).",
+    github: "https://github.com/getuar04/quiz-management",
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2026",
+    displayOrder: 5,
+  },
   {
     id: "2af-auth-service",
     title: "2AF Authentication Service",
@@ -72,55 +275,12 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2026",
-    displayOrder: 1,
+    displayOrder: 6,
   },
-  {
-    id: "resource-booking-system",
-    title: "Resource Booking System",
-    titleSq: "Sistemi i Rezervimit të Burimeve",
-    category: "Full-Stack / Microservices",
-    categorySq: "Full-Stack / Mikroshërbime",
-    context: "university",
-    filters: ["featured", "fullstack", "university"],
-    featured: true,
-    completionStatus: "completed",
-    repositoryStatus: "unavailable",
-    demoStatus: "unavailable",
-    shortDescription:
-      "A university platform for managing resource availability and reservations, built with a full-stack microservices architecture.",
-    shortDescriptionSq:
-      "Platformë universitare për menaxhimin e disponueshmërisë dhe rezervimit të burimeve, ndërtuar me arkitekturë mikroshërbimesh full-stack.",
-    fullDescription:
-      "Resource Booking System manages resource availability and reservations through a full-stack microservices architecture: a React frontend, Node.js/Express services behind an API Gateway, MongoDB for persistence, JWT-based authentication, and a REST API. Docker Compose was used for local orchestration, with a Jenkins CI/CD pipeline for builds.",
-    fullDescriptionSq:
-      "Resource Booking System menaxhon disponueshmërinë dhe rezervimin e burimeve përmes një arkitekture mikroshërbimesh full-stack: frontend në React, shërbime Node.js/Express pas një API Gateway, MongoDB për ruajtjen e të dhënave, autentikim JWT dhe REST API. Docker Compose u përdor për orkestrim lokal, me pipeline Jenkins CI/CD për build-e.",
-    stack: [
-      "React", "Node.js", "Express.js", "MongoDB", "JWT", "REST API",
-      "Microservices", "API Gateway", "Docker", "Docker Compose", "Jenkins CI/CD", "Git", "GitHub",
-    ],
-    futureExtensions: [
-      "Kafka for event-driven communication between services",
-      "Kubernetes for orchestration",
-      "Redis for caching",
-      "Prometheus and Grafana for observability",
-    ],
-    futureExtensionsSq: [
-      "Kafka për komunikim event-driven mes shërbimeve",
-      "Kubernetes për orkestrim",
-      "Redis për caching",
-      "Prometheus dhe Grafana për observability",
-    ],
-    architecture:
-      "The architecture was designed with room for future event-driven communication, orchestration, caching, and observability extensions — these were not part of the completed implementation.",
-    architectureSq:
-      "Arkitektura u projektua me hapësirë për zgjerime të ardhshme në komunikim event-driven, orkestrim, caching dhe observability — këto nuk ishin pjesë e implementimit të përfunduar.",
-    github: null,
-    live: null,
-    screenshots: null,
-    linkedin: null,
-    year: "2026",
-    displayOrder: 2,
-  },
+
+  // ---------------------------------------------------------------------
+  // ARCHIVE / MORE PROJECTS
+  // ---------------------------------------------------------------------
   {
     id: "smart-kitchen",
     title: "Smart Kitchen & Meal Planner System",
@@ -128,8 +288,8 @@ const projects = [
     category: "University Project",
     categorySq: "Projekt Universitar",
     context: "university",
-    filters: ["featured", "university"],
-    featured: true,
+    filters: ["university"],
+    featured: false,
     completionStatus: "in-progress",
     repositoryStatus: "unavailable",
     demoStatus: "unavailable",
@@ -138,16 +298,16 @@ const projects = [
     shortDescriptionSq:
       "Projekt universitar (case-study) që eksploron menaxhimin e kuzhinës dhe planifikimin e vakteve.",
     fullDescription:
-      "Smart Kitchen & Meal Planner System is a university project developed as part of coursework at UBT. Detailed implementation specifics are not published here pending verification of the final source; only the confirmed project name and academic context are shown.",
+      "Smart Kitchen & Meal Planner System is a university project developed as part of coursework at UBT. Detailed implementation specifics are not published here pending verification of the final source; only the confirmed project name and academic context are shown. It is a separate project from Smart Resource Booking System and ARKA, with no shared codebase.",
     fullDescriptionSq:
-      "Smart Kitchen & Meal Planner System është projekt universitar i zhvilluar si pjesë e kurrikulës në UBT. Detajet e implementimit nuk publikohen këtu deri në verifikimin e burimit final; shfaqet vetëm emri i konfirmuar i projektit dhe konteksti akademik.",
+      "Smart Kitchen & Meal Planner System është projekt universitar i zhvilluar si pjesë e kurrikulës në UBT. Detajet e implementimit nuk publikohen këtu deri në verifikimin e burimit final; shfaqet vetëm emri i konfirmuar i projektit dhe konteksti akademik. Është projekt i ndarë nga Smart Resource Booking System dhe ARKA, pa kod të përbashkët.",
     stack: [],
     github: null,
     live: null,
     screenshots: null,
     linkedin: null,
     year: "2026",
-    displayOrder: 3,
+    displayOrder: 7,
   },
   {
     id: "course-management",
@@ -156,8 +316,8 @@ const projects = [
     category: "Full-Stack",
     categorySq: "Full-Stack",
     context: "personal",
-    filters: ["featured", "fullstack"],
-    featured: true,
+    filters: ["fullstack"],
+    featured: false,
     completionStatus: "in-progress",
     repositoryStatus: "unavailable",
     demoStatus: "unavailable",
@@ -185,7 +345,7 @@ const projects = [
     screenshots: "https://drive.google.com/drive/folders/1yixSis1RJwIIlKu43DKUxmEJ6DpOEPTr?usp=sharing",
     linkedin: null,
     year: "2026",
-    displayOrder: 4,
+    displayOrder: 8,
   },
   {
     id: "chatbot",
@@ -194,10 +354,11 @@ const projects = [
     category: "AI / NLP",
     categorySq: "AI / NLP",
     context: "personal",
-    filters: ["featured", "fullstack"],
-    featured: true,
+    filters: ["fullstack"],
+    featured: false,
     completionStatus: "completed",
     repositoryStatus: "public",
+    repositoryVisibility: "public",
     demoStatus: "unavailable",
     shortDescription:
       "Albanian-language chatbot powered by semantic similarity, a FastAPI backend, sentence transformers, and a custom Q&A dataset.",
@@ -221,7 +382,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2025",
-    displayOrder: 5,
+    displayOrder: 9,
   },
   {
     id: "social-media",
@@ -230,10 +391,11 @@ const projects = [
     category: "Full-Stack",
     categorySq: "Full-Stack",
     context: "personal",
-    filters: ["featured", "fullstack"],
-    featured: true,
+    filters: ["fullstack"],
+    featured: false,
     completionStatus: "completed",
     repositoryStatus: "public",
+    repositoryVisibility: "public",
     demoStatus: "unavailable",
     shortDescription:
       "A social media platform with authentication, profile pages, image uploads, posts CRUD, likes, pagination, 2FA, and a REST API.",
@@ -262,12 +424,82 @@ const projects = [
     linkedin:
       "https://www.linkedin.com/posts/roi-academy_roiacademy-fullstack-programming-activity-7438291173422743552-BXG3?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAELfj7YBZRzJNW_jKfzx-HahMMNyHQwIEnU",
     year: "2025",
-    displayOrder: 6,
+    displayOrder: 10,
   },
-
-  // ---------------------------------------------------------------------
-  // ADDITIONAL
-  // ---------------------------------------------------------------------
+  {
+    id: "digital-invitation-platform",
+    title: "Digital Invitation Platform",
+    titleSq: "Platforma e Ftesave Digjitale",
+    category: "Frontend / Interactive Experience",
+    categorySq: "Frontend / Përvojë Interaktive",
+    context: "personal",
+    filters: ["frontend"],
+    featured: false,
+    completionStatus: "coming-soon",
+    repositoryStatus: "private",
+    repositoryVisibility: "private",
+    demoStatus: "unavailable",
+    shortDescription:
+      "A mobile-first interactive digital invitation platform built around a premium card-opening experience.",
+    shortDescriptionSq:
+      "Platformë mobile-first për ftesa digjitale interaktive, e ndërtuar rreth një përvoje premium të hapjes së ftesës.",
+    fullDescription:
+      "A mobile-first interactive digital invitation platform built to create a premium card-opening experience rather than a conventional event website. It combines animated invitation opening, elegant typography, event information, map access, responsive interaction, and reusable client-specific configuration.",
+    fullDescriptionSq:
+      "Platformë mobile-first për ftesa digjitale interaktive, e krijuar për të ofruar përvojën e hapjes së një ftese premium dhe jo pamjen e një faqeje të zakonshme eventi. Përfshin animacionin e hapjes së ftesës, tipografi elegante, informacione të eventit, hartë, ndërveprim responsive dhe konfigurim të ripërdorshëm për klientë të ndryshëm.",
+    stack: [],
+    futureExtensions: [
+      "Persistent RSVP storage and backend RSVP management",
+      "Client dashboards",
+      "Multiple invitation templates and automatic invitation generation",
+      "Multi-client administration",
+    ],
+    futureExtensionsSq: [
+      "Ruajtje e qëndrueshme e RSVP dhe menaxhim RSVP në backend",
+      "Panele klientësh",
+      "Shabllone të shumta ftesash dhe gjenerim automatik i ftesave",
+      "Administrim me shumë klientë",
+    ],
+    note: "In development. The current RSVP interface does not yet persist real confirmations — backend storage is planned, not implemented.",
+    noteSq: "Në zhvillim. Interfejsi aktual i RSVP ende nuk ruan konfirmime reale — ruajtja në backend është e planifikuar, jo e implementuar.",
+    github: "https://github.com/getuar04/invations",
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2026",
+    displayOrder: 11,
+  },
+  {
+    id: "ecommerce-crawler",
+    title: "E-commerce Product Data Crawler",
+    titleSq: "Mbledhës i të Dhënave të Produkteve E-commerce",
+    category: "Backend / Automation",
+    categorySq: "Backend / Automatizim",
+    context: "personal",
+    filters: ["backend", "automation"],
+    featured: false,
+    completionStatus: "completed",
+    repositoryStatus: "private",
+    repositoryVisibility: "private",
+    demoStatus: "unavailable",
+    shortDescription:
+      "A Node.js-based crawling and data-extraction tool that exports structured e-commerce product data to CSV.",
+    shortDescriptionSq:
+      "Mjet i ndërtuar me Node.js për crawling dhe nxjerrjen e të dhënave të produkteve, me eksportim në CSV.",
+    fullDescription:
+      "A Node.js-based crawling and data-extraction tool that collects structured product information from e-commerce pages and exports the processed results into CSV format.",
+    fullDescriptionSq:
+      "Mjet i ndërtuar me Node.js për crawling dhe nxjerrjen e të dhënave të strukturuara të produkteve nga faqe e-commerce, me përpunim dhe eksportim të rezultateve në format CSV.",
+    stack: ["Node.js", "CSV Export"],
+    note: "The specific scraping method, targeted site(s), and library choice were not source-verified for this update, so no multi-site support, proxy rotation, or scheduling is claimed.",
+    noteSq: "Metoda specifike e scraping-ut, faqja/faqet e synuara dhe libraria e përdorur nuk u verifikuan nga burimi për këtë përditësim, prandaj nuk pretendohet mbështetje multi-site, rotacion proxy, apo planifikim automatik.",
+    github: "https://github.com/getuar04/crawl",
+    live: null,
+    screenshots: null,
+    linkedin: null,
+    year: "2025",
+    displayOrder: 12,
+  },
   {
     id: "2fa-auth",
     title: "Two-Factor Authentication System",
@@ -279,6 +511,7 @@ const projects = [
     featured: false,
     completionStatus: "completed",
     repositoryStatus: "public",
+    repositoryVisibility: "public",
     demoStatus: "unavailable",
     shortDescription:
       "Secure authentication flow using email-based 2FA codes, MongoDB TTL cleanup, rate limiting, and verification endpoints.",
@@ -294,7 +527,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2025",
-    displayOrder: 7,
+    displayOrder: 13,
   },
   {
     id: "mobileria-nita",
@@ -322,7 +555,7 @@ const projects = [
     screenshots: "https://drive.google.com/drive/folders/1RrkcH0WkyM2VH9Dj-7LXd5pUi15LSR7W?usp=drive_link",
     linkedin: null,
     year: "2024",
-    displayOrder: 8,
+    displayOrder: 14,
   },
   {
     id: "book-list",
@@ -344,7 +577,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2024",
-    displayOrder: 9,
+    displayOrder: 15,
   },
   {
     id: "countries-app",
@@ -366,7 +599,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2024",
-    displayOrder: 10,
+    displayOrder: 16,
   },
   {
     id: "todo-list",
@@ -388,7 +621,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2024",
-    displayOrder: 11,
+    displayOrder: 17,
   },
   {
     id: "weather-app",
@@ -410,7 +643,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2024",
-    displayOrder: 12,
+    displayOrder: 18,
   },
   {
     id: "google-oauth-integration",
@@ -438,7 +671,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2025",
-    displayOrder: 13,
+    displayOrder: 19,
   },
 
   // ---------------------------------------------------------------------
@@ -473,7 +706,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2026",
-    displayOrder: 14,
+    displayOrder: 20,
   },
   {
     id: "ai-impact-kosovo-research",
@@ -504,7 +737,7 @@ const projects = [
     screenshots: null,
     linkedin: null,
     year: "2026",
-    displayOrder: 15,
+    displayOrder: 21,
   },
 ];
 

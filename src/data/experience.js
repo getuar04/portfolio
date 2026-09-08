@@ -1,65 +1,52 @@
-// Professional experience. `employer` is intentionally left blank/null where not
-// confirmed for public display — the UI must not render a placeholder in its place.
+// Professional experience.
 const experience = [
   {
     id: "junior-backend-developer",
     role: "Junior Backend Developer",
     roleSq: "Zhvillues Backend Junior",
-    employer: null,
+    employer: "SoftDome",
     period: "April 2026 – Present",
     periodSq: "Prill 2026 – Aktualisht",
     type: "current",
     summary:
-      "Working on backend services and APIs built with Node.js and TypeScript, contributing to authentication, data persistence, and reliability across a service-oriented backend.",
+      "Working on backend services and APIs built with Node.js and TypeScript, and contributing to a personalised video recommendation and ranking workflow.",
     summarySq:
-      "Punoj në shërbime backend dhe API të ndërtuara me Node.js dhe TypeScript, duke kontribuar në autentikim, ruajtjen e të dhënave dhe qëndrueshmërinë e sistemit.",
-    highlights: [
-      "Implemented and maintained REST APIs with Express.js, following Clean Architecture principles.",
-      "Contributed to authentication and authorization work, including JWT-based sessions, RBAC, and two-factor authentication.",
-      "Worked with PostgreSQL, MongoDB, and Redis for data persistence and caching.",
-      "Integrated services using Kafka for event-driven communication.",
-      "Containerized services with Docker and Docker Compose; contributed to Kubernetes deployment configuration.",
-      "Set up and maintained Jenkins CI/CD pipeline steps for automated builds and testing.",
-      "Wrote unit and integration tests, improved structured logging, and added health-check endpoints and API documentation.",
-      "Contributed to security improvements and backend service reliability as part of the team.",
-    ],
-    highlightsSq: [
-      "Implementova dhe mirëmbajta REST API me Express.js, duke ndjekur parimet e Clean Architecture.",
-      "Kontribuova në punën e autentikimit dhe autorizimit, duke përfshirë sesione JWT, RBAC dhe autentikim dyfaktorësh.",
-      "Punova me PostgreSQL, MongoDB dhe Redis për ruajtjen e të dhënave dhe caching.",
-      "Integrova shërbime duke përdorur Kafka për komunikim event-driven.",
-      "Kontenerizova shërbime me Docker dhe Docker Compose; kontribuova në konfigurimin e Kubernetes.",
-      "Konfigurova dhe mirëmbajta hapa të pipeline-it Jenkins CI/CD për build dhe testim automatik.",
-      "Shkrova teste unit dhe integrimi, përmirësova logging-un e strukturuar, dhe shtova health-check endpoints dhe dokumentim API.",
-      "Kontribuova në përmirësime sigurie dhe qëndrueshmërinë e shërbimeve backend si pjesë e ekipit.",
+      "Punoj në shërbime backend dhe API të ndërtuara me Node.js dhe TypeScript, dhe kontribuoj në një rrjedhë pune për rekomandim dhe renditje të personalizuar videosh.",
+    sections: [
+      {
+        title: "Backend Development",
+        titleSq: "Zhvillim Backend",
+        items: [
+          "Develop and maintain backend services and REST APIs using Node.js, TypeScript, Express.js, PostgreSQL, MongoDB, and Redis.",
+          "Work with authentication, JWT, RBAC, two-factor authentication, clean architecture, testing, logging, and API health monitoring.",
+          "Use Docker, Kafka, Jenkins CI/CD, and Kubernetes-oriented deployment workflows as part of backend delivery.",
+        ],
+        itemsSq: [
+          "Zhvilloj dhe mirëmbaj shërbime backend dhe REST API me Node.js, TypeScript, Express.js, PostgreSQL, MongoDB dhe Redis.",
+          "Punoj me autentikim, JWT, RBAC, autentikim dyfaktorësh, clean architecture, testim, logging dhe monitorim të health endpoints.",
+          "Përdor Docker, Kafka, Jenkins CI/CD dhe procese të orientuara në Kubernetes për dorëzimin e shërbimeve backend.",
+        ],
+      },
+      {
+        title: "Machine Learning",
+        titleSq: "Machine Learning",
+        items: [
+          "Contribute to a personalised video recommendation and ranking workflow using Python, FastAPI, PostgreSQL, scikit-learn, LightGBM, and XGBoost.",
+          "Prepare chronological point-in-time datasets and behavioural, session, semantic, and social features while reducing data leakage.",
+          "Compare ranking candidates using F1, AUC, Precision@5, and NDCG@10, with offline evaluation and controlled human review before model promotion.",
+        ],
+        itemsSq: [
+          "Kontribuoj në një sistem të personalizuar për rekomandimin dhe renditjen e videove me Python, FastAPI, PostgreSQL, scikit-learn, LightGBM dhe XGBoost.",
+          "Përgatis dataset-e kronologjike point-in-time dhe veçori të sjelljes, sesioneve, përmbajtjes semantike dhe sinjaleve sociale, duke zvogëluar data leakage.",
+          "Krahasoj modele me F1, AUC, Precision@5 dhe NDCG@10 përmes vlerësimit offline dhe kontrollit njerëzor para promovimit.",
+        ],
+      },
     ],
     stack: [
-      "Node.js", "TypeScript", "Express.js", "REST APIs", "PostgreSQL", "MongoDB",
-      "Redis", "Kafka", "Docker", "Docker Compose", "Kubernetes", "Jenkins CI/CD",
-      "JWT", "RBAC", "Two-Factor Authentication", "Clean Architecture",
+      "Node.js", "TypeScript", "Express.js", "REST APIs", "PostgreSQL", "MongoDB", "Redis",
+      "Docker", "Kafka", "Jenkins CI/CD", "Kubernetes", "JWT", "RBAC", "Two-Factor Authentication",
+      "Python", "FastAPI", "scikit-learn", "LightGBM", "XGBoost",
     ],
-  },
-  {
-    id: "sharp-group-internship",
-    role: "Programming Department Intern",
-    roleSq: "Praktikant në Departamentin e Programimit",
-    employer: "Sharp Group LTD",
-    period: "October 2025 – March 2026",
-    periodSq: "Tetor 2025 – Mars 2026",
-    type: "past",
-    summary:
-      "Six-month internship in the programming department, working on practical programming tasks based on client requirements.",
-    summarySq:
-      "Internship gjashtë-mujor në departamentin e programimit, duke punuar në detyra praktike programimi bazuar në kërkesat e klientëve.",
-    highlights: [
-      "Completed practical programming tasks aligned with real client requirements.",
-      "Gained hands-on experience working within a professional development environment and team workflow.",
-    ],
-    highlightsSq: [
-      "Kreu detyra praktike programimi në përputhje me kërkesat reale të klientëve.",
-      "Fitoi përvojë praktike duke punuar brenda një mjedisi profesional zhvillimi dhe rrjedhe pune ekipore.",
-    ],
-    stack: [],
   },
 ];
 

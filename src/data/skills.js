@@ -1,38 +1,55 @@
 const skillGroups = [
   {
-    title: "Frontend",
-    titleSq: "Frontend",
-    icon: "◈",
-    color: "cyan",
-    items: ["React", "HTML", "CSS", "JavaScript", "Tailwind CSS", "Bootstrap", "Context API", "React Query", "Redux", "Zustand"],
-  },
-  {
     title: "Backend",
     titleSq: "Backend",
     icon: "⬡",
     color: "violet",
-    items: ["Node.js", "Express.js", "REST APIs", "JWT Auth", "RBAC", "2FA", "PHP"],
+    items: [
+      "Node.js", "TypeScript", "JavaScript", "Express.js", "REST APIs", "JWT",
+      "RBAC", "Two-Factor Authentication", "Clean Architecture", "API Validation", "Testing",
+    ],
   },
   {
-    title: "Databases",
+    title: "Databases & Data",
     titleSq: "Bazat e të Dhënave",
     icon: "◉",
     color: "emerald",
-    items: ["MySQL", "MongoDB", "Microsoft SQL Server"],
+    items: [
+      "PostgreSQL", "MySQL", "MongoDB", "Redis", "Microsoft SQL Server", "SQL", "Database Modelling",
+    ],
   },
   {
-    title: "Tools & Cloud",
-    titleSq: "Mjete & Cloud",
+    title: "Messaging & Architecture",
+    titleSq: "Mesazhe & Arkitekturë",
+    icon: "◈",
+    color: "cyan",
+    items: ["Kafka", "Event-Driven Architecture", "Microservices", "API Gateway"],
+  },
+  {
+    title: "DevOps & Tools",
+    titleSq: "DevOps & Mjete",
     icon: "⬢",
     color: "amber",
-    items: ["Git", "GitHub", "Docker", "Postman", "ImageKit", "Render", "Figma", "Photoshop", "Illustrator"],
+    items: [
+      "Docker", "Docker Compose", "Kubernetes", "Jenkins CI/CD", "Git", "GitHub",
+      "Postman", "Swagger / OpenAPI", "Render", "ImageKit",
+    ],
   },
   {
-    title: "Languages",
-    titleSq: "Gjuhët e Programimit",
+    title: "Frontend",
+    titleSq: "Frontend",
     icon: "◇",
     color: "rose",
-    items: ["JavaScript", "Java", "SQL", "PHP", "Python"],
+    items: [
+      "React", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "Context API", "React Query", "Redux", "Zustand",
+    ],
+  },
+  {
+    title: "Additional Exposure",
+    titleSq: "Ekspozim Shtesë",
+    icon: "✦",
+    color: "slate",
+    items: ["Java", "Python", "PHP", "C", "C++", "C#", "Figma", "Photoshop", "Illustrator"],
   },
 ];
 

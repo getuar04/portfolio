@@ -1,5 +1,6 @@
 import { useLang } from "../context/LanguageContext";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import profile from "../data/profile";
 
 export default function CV() {
   const { t } = useLang();
@@ -22,27 +23,27 @@ export default function CV() {
             <div>
               <p className="section-label mb-5">{t.cv.label}</p>
               <h2 className="section-heading mb-4">{t.cv.heading}</h2>
-              <p className="text-base leading-8" style={{ color: "rgba(255,255,255,0.55)" }}>
+              <p className="text-base leading-8" style={{ color: "var(--ink-2)" }}>
                 {t.cv.sub}
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-4">
               <a
-                href="/cv/Getuar-Jakupi-CV.pdf"
+                href={profile.cvPath}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ghost justify-center"
                 style={{ fontFamily: "'Syne', sans-serif" }}
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
                 {t.cv.preview}
               </a>
               <a
-                href="/cv/Getuar-Jakupi-CV.pdf"
+                href={profile.cvPath}
                 download
                 className="btn-primary justify-center"
                 style={{ fontFamily: "'Syne', sans-serif" }}

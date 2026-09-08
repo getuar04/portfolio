@@ -3,18 +3,58 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#080810" />
+    <meta name="theme-color" content="#08080f" />
 
-    <title>Getuar Jakupi | Full-Stack Developer</title>
-    <meta name="description" content="Portfolio of Getuar Jakupi — Full-Stack Developer specializing in React, Node.js, MySQL, and MongoDB. View projects, skills, certificates, and contact details." />
+    <title>Getuar Jakupi | Backend Developer</title>
+    <meta name="description" content="Portfolio of Getuar Jakupi — Backend Developer building secure, maintainable, and scalable services and APIs with Node.js and TypeScript. Projects, experience, skills, and contact details." />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://getuarjakupi.rf.gd/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Getuar Jakupi | Full-Stack Developer" />
-    <meta property="og:description" content="React · Node.js · MySQL · MongoDB — Projects, skills, certificates, and contact." />
+    <meta property="og:title" content="Getuar Jakupi | Backend Developer" />
+    <meta property="og:description" content="Backend Developer building secure, maintainable, and scalable services with Node.js and TypeScript. Projects, experience, skills, and contact." />
     <meta property="og:url" content="https://getuarjakupi.rf.gd/" />
 
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Getuar Jakupi | Backend Developer" />
+    <meta name="twitter:description" content="Backend Developer building secure, maintainable, and scalable services with Node.js and TypeScript." />
+
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon-180.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Getuar Jakupi",
+        "url": "https://getuarjakupi.rf.gd/",
+        "jobTitle": "Backend Developer",
+        "email": "mailto:getuar.j1@gmail.com",
+        "sameAs": [
+          "https://github.com/getuar04",
+          "https://www.linkedin.com/in/getuar-jakupi/"
+        ],
+        "knowsAbout": ["Node.js", "TypeScript", "Express.js", "REST APIs", "PostgreSQL", "MongoDB", "Docker"]
+      }
+    </script>
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("gj-theme");
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>This site requires JavaScript.</noscript>

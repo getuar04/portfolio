@@ -3,11 +3,12 @@ import { useScrollReveal } from "../hooks/useScrollReveal";
 import skillGroups from "../data/skills";
 
 const colorMap = {
-  cyan:   { bg: "rgba(6,182,212,0.1)",   text: "#67e8f9", border: "rgba(6,182,212,0.2)",   icon: "rgba(6,182,212,0.8)"   },
-  violet: { bg: "rgba(124,58,237,0.1)",  text: "var(--accent-light)", border: "rgba(124,58,237,0.2)", icon: "rgba(124,58,237,0.8)" },
-  emerald:{ bg: "rgba(52,211,153,0.1)",  text: "#6ee7b7", border: "rgba(52,211,153,0.2)",  icon: "rgba(52,211,153,0.8)"  },
-  amber:  { bg: "rgba(245,158,11,0.1)",  text: "#fcd34d", border: "rgba(245,158,11,0.2)",  icon: "rgba(245,158,11,0.8)"  },
-  rose:   { bg: "rgba(244,63,94,0.1)",   text: "#fda4af", border: "rgba(244,63,94,0.2)",   icon: "rgba(244,63,94,0.8)"   },
+  cyan:    { bg: "rgba(6,182,212,0.1)",   text: "#67e8f9", border: "rgba(6,182,212,0.2)",   icon: "rgba(6,182,212,0.8)"   },
+  violet:  { bg: "rgba(124,58,237,0.1)",  text: "var(--accent-light)", border: "rgba(124,58,237,0.2)", icon: "rgba(124,58,237,0.8)" },
+  emerald: { bg: "rgba(52,211,153,0.1)",  text: "#6ee7b7", border: "rgba(52,211,153,0.2)",  icon: "rgba(52,211,153,0.8)"  },
+  amber:   { bg: "rgba(245,158,11,0.1)",  text: "#fcd34d", border: "rgba(245,158,11,0.2)",  icon: "rgba(245,158,11,0.8)"  },
+  rose:    { bg: "rgba(244,63,94,0.1)",   text: "#fda4af", border: "rgba(244,63,94,0.2)",   icon: "rgba(244,63,94,0.8)"   },
+  slate:   { bg: "rgba(148,163,184,0.1)", text: "#cbd5e1", border: "rgba(148,163,184,0.2)", icon: "rgba(148,163,184,0.8)" },
 };
 
 function SkillCard({ group, lang, visible, delay }) {
@@ -19,6 +20,7 @@ function SkillCard({ group, lang, visible, delay }) {
         <div
           className="h-10 w-10 rounded-xl flex items-center justify-center text-lg shrink-0"
           style={{ background: c.bg, border: `1px solid ${c.border}`, color: c.icon }}
+          aria-hidden="true"
         >
           {group.icon}
         </div>
@@ -45,11 +47,6 @@ export default function Skills() {
   const { lang, t } = useLang();
   const { ref, visible } = useScrollReveal();
 
-  // skillGroups order: [Frontend, Backend, Databases, Tools, Languages]
-  // Layout: row1 = Frontend + Backend (2 wide cards), row2 = Databases + Tools + Languages (3 cards)
-  const row1 = skillGroups.slice(0, 2);   // Frontend, Backend
-  const row2 = skillGroups.slice(2);      // Databases, Tools, Languages
-
   return (
     <section id="skills" className="sec" ref={ref}>
       <div className="wrap">
@@ -59,17 +56,9 @@ export default function Skills() {
           <h2 className="section-heading">{t.skills.heading}</h2>
         </div>
 
-        {/* Row 1 — 2 wide cards */}
-        <div className="grid sm:grid-cols-2 gap-5 mb-5">
-          {row1.map((group, i) => (
-            <SkillCard key={group.title} group={group} lang={lang} visible={visible} delay={i + 1} />
-          ))}
-        </div>
-
-        {/* Row 2 — 3 cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {row2.map((group, i) => (
-            <SkillCard key={group.title} group={group} lang={lang} visible={visible} delay={i + 3} />
+          {skillGroups.map((group, i) => (
+            <SkillCard key={group.title} group={group} lang={lang} visible={visible} delay={(i % 6) + 1} />
           ))}
         </div>
       </div>

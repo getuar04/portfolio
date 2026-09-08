@@ -57,12 +57,12 @@ export default function About() {
           {/* Cards col */}
           <div className="lg:col-span-3 flex flex-col gap-4">
             <div className={`reveal ${visible ? "visible" : ""} reveal-delay-1 glass rounded-[24px] p-7 card-hover`}>
-              <p className="text-base leading-8" style={{ color: "rgba(255,255,255,0.65)" }}>
+              <p className="text-base leading-8" style={{ color: "var(--ink-2)" }}>
                 {t.about.card1}
               </p>
             </div>
             <div className={`reveal ${visible ? "visible" : ""} reveal-delay-2 glass rounded-[24px] p-7 card-hover`}>
-              <p className="text-base leading-8" style={{ color: "rgba(255,255,255,0.65)" }}>
+              <p className="text-base leading-8" style={{ color: "var(--ink-2)" }}>
                 {t.about.card2}
               </p>
             </div>
@@ -73,18 +73,19 @@ export default function About() {
             {/* Avatar / initials card */}
             <div className={`reveal ${visible ? "visible" : ""} reveal-delay-1 glass rounded-[24px] p-6 card-hover flex items-center gap-5`}>
               <div
-                className="h-16 w-16 rounded-2xl flex items-center justify-center text-2xl font-black shrink-0"
+                className="h-16 w-16 rounded-2xl flex items-center justify-center text-2xl font-black shrink-0 on-accent"
                 style={{
                   background: "linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%)",
                   fontFamily: "'Syne', sans-serif",
                 }}
+                aria-hidden="true"
               >
                 GJ
               </div>
               <div>
                 <p className="font-bold text-white text-lg" style={{ fontFamily: "'Syne', sans-serif" }}>Getuar Jakupi</p>
-                <p className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>Full-Stack Developer</p>
-                <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.3)" }}>Pristina, Kosovo</p>
+                <p className="text-sm" style={{ color: "var(--ink-4)" }}>{t.about.role}</p>
+                <p className="text-xs mt-1" style={{ color: "var(--ink-6)" }}>{t.about.location}</p>
               </div>
             </div>
 
@@ -96,10 +97,11 @@ export default function About() {
                     <div
                       className="h-8 w-8 rounded-xl flex items-center justify-center shrink-0"
                       style={{ background: "rgba(124,58,237,0.12)", color: "var(--accent-light)" }}
+                      aria-hidden="true"
                     >
                       {item.icon}
                     </div>
-                    <span className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>
+                    <span className="text-sm" style={{ color: "var(--ink-2)" }}>
                       {t.about[item.key]}
                     </span>
                   </div>
@@ -109,7 +111,7 @@ export default function About() {
 
             {/* Email quick contact */}
             <div className={`reveal ${visible ? "visible" : ""} reveal-delay-3 glass rounded-[24px] p-5 card-hover`}>
-              <p className="text-xs mb-2" style={{ color: "rgba(255,255,255,0.35)" }}>Quick Contact</p>
+              <p className="text-xs mb-2" style={{ color: "var(--ink-5)" }}>{t.about.quickContact}</p>
               <a
                 href="mailto:getuar.j1@gmail.com"
                 className="text-sm font-medium transition-colors"

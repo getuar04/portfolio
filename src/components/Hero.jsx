@@ -16,6 +16,22 @@ const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
+// One technology chip. Plain text only (no decorative bullet) — clean pill
+// matching the original deployed style. `white-space: nowrap` keeps long
+// names (e.g. "Two-Factor Authentication") on a single line.
+function TechChip({ tech, hidden }) {
+  return (
+    <span
+      role="listitem"
+      aria-hidden={hidden ? "true" : undefined}
+      className="hero-tech-chip"
+      style={{ whiteSpace: "nowrap" }}
+    >
+      {tech}
+    </span>
+  );
+}
+
 // In-development / coming-soon projects lead the rotation, then featured
 // completed work — read entirely from the shared project-data array.
 function buildRotation(lang) {
@@ -52,9 +68,11 @@ export default function Hero() {
   }, []);
 
   const rotation = useMemo(() => buildRotation(lang), [lang]);
-  // Calm-but-unmistakable speed: scales with the list so future additions
-  // don't make it feel rushed or drag on forever.
-  const marqueeDuration = `${(STACK_MARQUEE.length * 1.2).toFixed(1)}s`;
+  // The technology carousel is decorative motion, not essential content, but
+  // unlike page-level animations it must never stop entirely (a frozen,
+  // fully-visible 22-item list would defeat its purpose as a carousel) — so
+  // reduced motion only slows it down instead of disabling it.
+  const marqueeDuration = reducedMotion ? "20s" : "14s";
 
   const stats = useMemo(() => {
     const count = (tag) => projects.filter((p) => p.filters.includes(tag)).length;
@@ -291,58 +309,33 @@ export default function Hero() {
                 ))}
               </div>
 
-              {/* Stack marquee — real continuous loop; a readable static wrap under reduced motion */}
-              {reducedMotion ? (
+              {/* Stack marquee — one compact always-moving row. Reduced motion
+                  only slows it (20s vs 14s); it never switches to a wrapped
+                  list, so the Hero card height never depends on item count. */}
+              <div
+                className="hero-tech-marquee"
+                tabIndex={0}
+                role="list"
+                aria-label="Core technologies, scrolling continuously"
+                style={{ overflow: "hidden" }}
+              >
                 <div
-                  className="overflow-hidden rounded-xl py-2.5 sm:py-3 px-2.5"
-                  role="list"
-                  aria-label="Core technologies"
-                  style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
+                  className="hero-tech-track"
+                  role="presentation"
+                  style={{ animationDuration: marqueeDuration, flexWrap: "nowrap" }}
                 >
-                  <div className="flex flex-wrap gap-2">
+                  <div className="hero-tech-group" role="presentation" style={{ flexWrap: "nowrap" }}>
                     {STACK_MARQUEE.map((tech) => (
-                      <span
-                        key={tech}
-                        role="listitem"
-                        className="text-xs px-2.5 sm:px-3 py-1 rounded-full shrink-0"
-                        style={{
-                          background: "rgba(124,58,237,0.15)",
-                          color: "var(--accent-light)",
-                          border: "1px solid rgba(124,58,237,0.2)",
-                        }}
-                      >
-                        {tech}
-                      </span>
+                      <TechChip key={tech} tech={tech} />
+                    ))}
+                  </div>
+                  <div className="hero-tech-group" role="presentation" aria-hidden="true" style={{ flexWrap: "nowrap" }}>
+                    {STACK_MARQUEE.map((tech) => (
+                      <TechChip key={tech} tech={tech} hidden />
                     ))}
                   </div>
                 </div>
-              ) : (
-                <div
-                  className="marquee-viewport overflow-hidden rounded-xl py-2.5 sm:py-3"
-                  tabIndex={0}
-                  role="list"
-                  aria-label="Core technologies, scrolling continuously"
-                  style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
-                >
-                  <div className="marquee-track flex gap-3 sm:gap-4 w-max" style={{ animationDuration: marqueeDuration }}>
-                    {[...STACK_MARQUEE, ...STACK_MARQUEE].map((tech, i) => (
-                      <span
-                        key={i}
-                        role="listitem"
-                        aria-hidden={i >= STACK_MARQUEE.length ? "true" : undefined}
-                        className="text-xs px-2.5 sm:px-3 py-1 rounded-full shrink-0"
-                        style={{
-                          background: "rgba(124,58,237,0.15)",
-                          color: "var(--accent-light)",
-                          border: "1px solid rgba(124,58,237,0.2)",
-                        }}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
+              </div>
             </div>
           </div>
         </div>

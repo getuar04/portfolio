@@ -307,20 +307,65 @@ button:focus-visible,
 }
 .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
 
-/* Marquee */
-@keyframes marquee {
+/* Hero technology carousel — one compact always-moving row.
+   Intentionally NOT included in the prefers-reduced-motion freeze below:
+   a frozen, fully-expanded 22-item list would defeat the point of a
+   carousel, so reduced motion only slows this one down (see the
+   animation-duration set inline from Hero.jsx) instead of stopping it. */
+@keyframes heroTechScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.marquee-track { animation: marquee 20s linear infinite; }
-.marquee-viewport {
+.hero-tech-marquee {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
 }
-.marquee-viewport:hover .marquee-track,
-.marquee-viewport:focus-within .marquee-track,
-.marquee-viewport:focus .marquee-track {
+.hero-tech-track {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+  will-change: transform;
+  animation-name: heroTechScroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.hero-tech-marquee:hover .hero-tech-track,
+.hero-tech-marquee:focus-within .hero-tech-track,
+.hero-tech-marquee:focus .hero-tech-track {
   animation-play-state: paused;
+}
+.hero-tech-group {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 16px;
+  padding-right: 16px;
+}
+.hero-tech-chip {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 500;
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--accent-light);
+  border: 1px solid rgba(124, 58, 237, 0.25);
 }
 
 /* Status dot */
@@ -372,7 +417,6 @@ button:focus-visible,
   }
   .float,
   .pulse-glow,
-  .marquee-track,
   .status-dot,
   .cursor {
     animation: none !important;
@@ -384,5 +428,15 @@ button:focus-visible,
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* The Hero technology carousel is the one intentional exception: it must
+     keep moving (slower) under reduced motion rather than freeze into a
+     fully-expanded static list. A class selector's !important always beats
+     the universal-selector !important rule above, regardless of source
+     order, so this reliably wins. */
+  .hero-tech-track {
+    animation-duration: 20s !important;
+    animation-iteration-count: infinite !important;
   }
 }

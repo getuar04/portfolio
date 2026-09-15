@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useLang } from "../context/LanguageContext";
 import profile from "../data/profile";
 import projects from "../data/projects";
@@ -15,6 +15,16 @@ const STACK_MARQUEE = [
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+const getServerReducedMotion = () => false;
+function subscribeReducedMotion(onChange) {
+  const mql = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  if (!mql) return () => {};
+  mql.addEventListener ? mql.addEventListener("change", onChange) : mql.addListener(onChange);
+  return () => {
+    mql.removeEventListener ? mql.removeEventListener("change", onChange) : mql.removeListener(onChange);
+  };
+}
 
 // One technology chip. Plain text only (no decorative bullet) — clean pill
 // matching the original deployed style. `white-space: nowrap` keeps long
@@ -55,17 +65,7 @@ export default function Hero() {
   const { lang, t } = useLang();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
-  const [reducedMotion, setReducedMotion] = useState(prefersReducedMotion);
-
-  useEffect(() => {
-    const mql = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    if (!mql) return;
-    const onChange = () => setReducedMotion(mql.matches);
-    mql.addEventListener ? mql.addEventListener("change", onChange) : mql.addListener(onChange);
-    return () => {
-      mql.removeEventListener ? mql.removeEventListener("change", onChange) : mql.removeListener(onChange);
-    };
-  }, []);
+  const reducedMotion = useSyncExternalStore(subscribeReducedMotion, prefersReducedMotion, getServerReducedMotion);
 
   const rotation = useMemo(() => buildRotation(lang), [lang]);
   // The technology carousel is decorative motion, not essential content, but

@@ -41,7 +41,7 @@ describe("Hero", () => {
     renderHero();
     expect(
       screen.getByText(
-        "I'm Getuar Jakupi, a Backend Developer building secure and maintainable services with Node.js and TypeScript, with additional experience in full-stack development and recommendation-focused Machine Learning."
+        "I'm Getuar Jakupi, a Backend Developer and Computer Science and Engineering student building secure, maintainable services with Node.js and TypeScript, with additional experience in full-stack development and recommendation-focused Machine Learning."
       )
     ).toBeInTheDocument();
   });
@@ -51,7 +51,7 @@ describe("Hero", () => {
     renderHero();
     expect(
       screen.getByText(
-        "Jam Getuar Jakupi, Zhvillues Backend që ndërtoj shërbime të sigurta dhe të mirëmbajtshme me Node.js dhe TypeScript, me përvojë shtesë në full-stack dhe Machine Learning për sisteme rekomanduese."
+        "Jam Getuar Jakupi, Zhvillues Backend dhe student i Shkencave Kompjuterike dhe Inxhinierisë që ndërtoj shërbime të sigurta dhe të mirëmbajtshme me Node.js dhe TypeScript, me përvojë shtesë në full-stack dhe Machine Learning për sisteme rekomanduese."
       )
     ).toBeInTheDocument();
   });

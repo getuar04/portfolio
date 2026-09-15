@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useSyncExternalStore } from "react";
 
 const translations = {
   en: {
@@ -25,7 +25,7 @@ const translations = {
       headline1: "Building",
       headline2: "secure backend systems",
       headline3: "with clean architecture, real APIs & production discipline.",
-      sub: "I'm Getuar Jakupi, a Backend Developer building secure and maintainable services with Node.js and TypeScript, with additional experience in full-stack development and recommendation-focused Machine Learning.",
+      sub: "I'm Getuar Jakupi, a Backend Developer and Computer Science and Engineering student building secure, maintainable services with Node.js and TypeScript, with additional experience in full-stack development and recommendation-focused Machine Learning.",
       cta1: "View Projects",
       cta2: "Download CV",
       cta3: "Contact Me",
@@ -188,7 +188,7 @@ const translations = {
       headline1: "Ndërtoj",
       headline2: "sisteme backend të sigurta",
       headline3: "me arkitekturë të pastër, API reale & disiplinë prodhimi.",
-      sub: "Jam Getuar Jakupi, Zhvillues Backend që ndërtoj shërbime të sigurta dhe të mirëmbajtshme me Node.js dhe TypeScript, me përvojë shtesë në full-stack dhe Machine Learning për sisteme rekomanduese.",
+      sub: "Jam Getuar Jakupi, Zhvillues Backend dhe student i Shkencave Kompjuterike dhe Inxhinierisë që ndërtoj shërbime të sigurta dhe të mirëmbajtshme me Node.js dhe TypeScript, me përvojë shtesë në full-stack dhe Machine Learning për sisteme rekomanduese.",
       cta1: "Shiko Projektet",
       cta2: "Shkarko CV",
       cta3: "Më Kontakto",
@@ -331,6 +331,8 @@ const translations = {
 
 const LanguageContext = createContext();
 const STORAGE_KEY = "gj-lang";
+const subscribe = () => () => {};
+const getServerLang = () => "en";
 
 function getInitialLang() {
   if (typeof window === "undefined") return "en";
@@ -349,7 +351,10 @@ const prefersReducedMotion = () =>
   window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
 export function LanguageProvider({ children }) {
-  const [lang, setLangState] = useState(getInitialLang);
+  // Match the English build HTML during hydration, then restore the preference.
+  const initialLang = useSyncExternalStore(subscribe, getInitialLang, getServerLang);
+  const [chosenLang, setLangState] = useState(null);
+  const lang = chosenLang ?? initialLang;
   const [fading, setFading] = useState(false);
   const t = translations[lang];
 
@@ -358,11 +363,11 @@ export function LanguageProvider({ children }) {
       document.documentElement.lang = lang;
     }
     try {
-      window.localStorage.setItem(STORAGE_KEY, lang);
+      if (chosenLang !== null) window.localStorage.setItem(STORAGE_KEY, lang);
     } catch {
       // ignore write failures (private browsing, storage disabled, etc.)
     }
-  }, [lang]);
+  }, [lang, chosenLang]);
 
   // Guarded so rapid repeated clicks can't stack/overlap the fade and break it.
   const changeLang = (next) => {

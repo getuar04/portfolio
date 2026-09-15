@@ -9,9 +9,9 @@ const profile = {
   location: "Pristina, Kosovo",
   github: "https://github.com/getuar04",
   githubHandle: "getuar04",
-  linkedin: "https://www.linkedin.com/in/getuar-jakupi/",
+  linkedin: "https://www.linkedin.com/in/getuar-jakupi",
   linkedinHandle: "getuar-jakupi",
-  website: "https://getuarjakupi.rf.gd/",
+  website: "https://getuarjakupi.com/",
   cvPath: "/cv/Getuar-Jakupi-CV.pdf",
 };
 

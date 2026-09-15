@@ -1,8 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useSyncExternalStore } from "react";
 
 const ThemeContext = createContext();
 const STORAGE_KEY = "gj-theme";
 const THEME_COLORS = { dark: "#08080f", light: "#f7f5f2" };
+const subscribe = () => () => {};
+const getServerTheme = () => "dark";
 
 function getInitialTheme() {
   if (typeof document === "undefined") return "dark";
@@ -14,20 +16,24 @@ function getInitialTheme() {
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(getInitialTheme);
+  const initialTheme = useSyncExternalStore(subscribe, getInitialTheme, getServerTheme);
+  const [chosenTheme, setTheme] = useState(null);
+  const theme = chosenTheme ?? initialTheme;
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    // Preserve the no-flash theme until the browser preference is restored.
+    const appliedTheme = chosenTheme === null ? getInitialTheme() : theme;
+    document.documentElement.setAttribute("data-theme", appliedTheme);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", THEME_COLORS[theme]);
+    if (meta) meta.setAttribute("content", THEME_COLORS[appliedTheme]);
     try {
-      window.localStorage.setItem(STORAGE_KEY, theme);
+      window.localStorage.setItem(STORAGE_KEY, appliedTheme);
     } catch {
       // ignore write failures (private browsing, storage disabled, etc.)
     }
-  }, [theme]);
+  }, [theme, chosenTheme]);
 
-  const toggle = () => setTheme((th) => (th === "dark" ? "light" : "dark"));
+  const toggle = () => setTheme(theme === "dark" ? "light" : "dark");
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggle }}>

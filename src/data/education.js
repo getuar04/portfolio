@@ -12,7 +12,7 @@ const education = [
   },
   {
     id: "gymnasium-skenderbeu",
-    school: 'Gymnasium "Skënderbeu", Preševo',
+    school: 'Gymnasium "Skënderbeu", Presevo',
     schoolSq: 'Gjimnazi "Skënderbeu", Preshevë',
     program: "General Studies",
     programSq: "Drejtimi i Përgjithshëm",

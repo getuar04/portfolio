@@ -2,8 +2,8 @@
 const experience = [
   {
     id: "junior-backend-developer",
-    role: "Junior Backend Developer",
-    roleSq: "Zhvillues Backend Junior",
+    role: "Backend Developer",
+    roleSq: "Zhvillues Backend",
     employer: "SoftDome",
     period: "April 2026 – Present",
     periodSq: "Prill 2026 – Aktualisht",

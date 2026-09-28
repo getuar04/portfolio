@@ -1,6 +1,18 @@
 const certificates = [
   {
+    id: 12,
+    group: "qendra-fit",
+    label: "Node.js Web Application Development",
+    labelSq: "Zhvillim i Aplikacioneve Web me Node.js",
+    issuer: "Qendra FIT · Beetroot Academy · Kutia",
+    year: "2026",
+    type: "image",
+    src: "/certificates/nodejs.jpg",
+  },
+
+  {
     id: 6,
+    group: "roi-academy",
     label: "Full Stack Web Development",
     labelSq: "Zhvillim Web Full Stack",
     issuer: "ROI Academy",
@@ -8,11 +20,11 @@ const certificates = [
     type: "pdf",
     src: "/certificates/RoiAcademy/Full-Stack.pdf",
   },
-
   {
     id: 2,
-    label: "NodeJS Module",
-    labelSq: "NodeJS Module",
+    group: "roi-academy",
+    label: "Node.js Module",
+    labelSq: "Moduli Node.js",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -20,8 +32,9 @@ const certificates = [
   },
   {
     id: 3,
-    label: "Database-Mongodb",
-    labelSq: "Baza e të dhënave-Mongodb",
+    group: "roi-academy",
+    label: "MongoDB Database",
+    labelSq: "Baza e të Dhënave MongoDB",
     issuer: "ROI Academy",
     year: "2026",
     type: "pdf",
@@ -29,8 +42,9 @@ const certificates = [
   },
   {
     id: 4,
-    label: "React Js & Advanced Module",
-    labelSq: "React Js & Module i Avancuar",
+    group: "roi-academy",
+    label: "React.js & Advanced Module",
+    labelSq: "React.js & Moduli i Avancuar",
     issuer: "ROI Academy",
     year: "2025",
     type: "pdf",
@@ -38,6 +52,7 @@ const certificates = [
   },
   {
     id: 5,
+    group: "roi-academy",
     label: "JavaScript",
     labelSq: "JavaScript",
     issuer: "ROI Academy",
@@ -47,6 +62,7 @@ const certificates = [
   },
   {
     id: 1,
+    group: "roi-academy",
     label: "HTML5 & CSS3",
     labelSq: "HTML5 & CSS3",
     issuer: "ROI Academy",
@@ -57,8 +73,9 @@ const certificates = [
 
   {
     id: 7,
-    label: "HTML, CSS, JavaScript & Web-Hosting",
-    labelSq: "HTML, CSS, JavaScript & Web-Hosting",
+    group: "arra-academy",
+    label: "HTML, CSS, JavaScript & Web Hosting",
+    labelSq: "HTML, CSS, JavaScript & Web Hosting",
     issuer: "Arra Academy",
     year: "2023",
     type: "image",
@@ -66,6 +83,7 @@ const certificates = [
   },
   {
     id: 8,
+    group: "arra-academy",
     label: "WordPress & eCommerce",
     labelSq: "WordPress & eCommerce",
     issuer: "Arra Academy",
@@ -75,8 +93,9 @@ const certificates = [
   },
   {
     id: 9,
-    label: "Graphic Design & UI/UX (FIGMA, Photoshop & Illustrator)",
-    labelSq: "Dizajn Grafik & UI/UX (FIGMA, Photoshop & Illustrator)",
+    group: "arra-academy",
+    label: "Graphic Design & UI/UX",
+    labelSq: "Dizajn Grafik & UI/UX",
     issuer: "Arra Academy",
     year: "2023",
     type: "image",
@@ -84,8 +103,9 @@ const certificates = [
   },
   {
     id: 10,
+    group: "arra-academy",
     label: "Cyber Security",
-    labelSq: "Siguria Kibernetike",
+    labelSq: "Siguri Kibernetike",
     issuer: "Arra Academy",
     year: "2023",
     type: "image",
@@ -93,21 +113,13 @@ const certificates = [
   },
   {
     id: 11,
+    group: "arra-academy",
     label: "C, C++, C# & SQL Database",
-    labelSq: "C, C++, C# & SQL Database",
+    labelSq: "C, C++, C# & Bazat e të Dhënave SQL",
     issuer: "Arra Academy",
     year: "2023",
     type: "image",
     src: "/certificates/ArraAcademy/C-C-C-SQL-Database.png",
-  },
-  {
-    id: 12,
-    label: "web application development",
-    labelSq: "Zhvillimi i aplikacioneve web",
-    issuer: "Qendra FIT · Beetroot Academy · Kutia",
-    year: "2026",
-    type: "image",
-    src: "/certificates/nodejs.jpg",
   },
 ];
 

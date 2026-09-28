@@ -100,6 +100,15 @@ const certificates = [
     type: "image",
     src: "/certificates/ArraAcademy/C-C-C-SQL-Database.png",
   },
+  {
+    id: 12,
+    label: "web application development",
+    labelSq: "Zhvillimi i aplikacioneve web",
+    issuer: "Qendra FIT · Beetroot Academy · Kutia",
+    year: "2026",
+    type: "image",
+    src: "/certificates/nodejs.jpg",
+  },
 ];
 
 export default certificates;

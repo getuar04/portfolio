@@ -5,25 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#08080f" />
 
+    <!-- Primary SEO -->
     <title>Getuar Jakupi | Backend Developer</title>
-    <meta name="description" content="Getuar Jakupi, Backend Developer and Computer Science and Engineering student. Explore projects in Node.js, TypeScript, scalable backend systems and APIs." />
+
+    <meta
+      name="description"
+      content="Getuar Jakupi, Backend Developer specializing in Node.js, TypeScript, scalable backend systems, APIs, microservices, and data-driven solutions."
+    />
+
     <meta name="robots" content="index, follow" />
+
     <link rel="canonical" href="https://getuarjakupi.com/" />
 
+    <!-- Open Graph: Facebook, LinkedIn, WhatsApp, Discord, etc. -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Getuar Jakupi | Backend Developer" />
-    <meta property="og:description" content="Getuar Jakupi, Backend Developer and Computer Science and Engineering student. Explore projects in Node.js, TypeScript, scalable backend systems and APIs." />
-    <meta property="og:url" content="https://getuarjakupi.com/" />
     <meta property="og:site_name" content="Getuar Jakupi" />
+    <meta property="og:url" content="https://getuarjakupi.com/" />
 
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:title" content="Getuar Jakupi | Backend Developer" />
+
+    <meta
+      property="og:description"
+      content="Backend Developer specializing in Node.js, TypeScript, scalable backend systems, APIs, microservices, and data-driven solutions."
+    />
+
+    <meta property="og:image" content="https://getuarjakupi.com/og-image.png" />
+
+    <meta
+      property="og:image:secure_url"
+      content="https://getuarjakupi.com/og-image.png"
+    />
+
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta property="og:image:alt" content="Getuar Jakupi — Backend Developer" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+
     <meta name="twitter:title" content="Getuar Jakupi | Backend Developer" />
-    <meta name="twitter:description" content="Getuar Jakupi, Backend Developer and Computer Science and Engineering student. Explore projects in Node.js, TypeScript, scalable backend systems and APIs." />
 
+    <meta
+      name="twitter:description"
+      content="Backend Developer specializing in Node.js, TypeScript, scalable backend systems, APIs, microservices, and data-driven solutions."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://getuarjakupi.com/og-image.png"
+    />
+
+    <meta
+      name="twitter:image:alt"
+      content="Getuar Jakupi — Backend Developer"
+    />
+
+    <!-- Favicons -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon-180.png" />
 
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%PUBLIC_URL%/favicon-32.png"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="%PUBLIC_URL%/favicon-180.png"
+    />
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -42,11 +97,16 @@
             "knowsAbout": [
               "Node.js",
               "TypeScript",
+              "JavaScript",
               "Express.js",
               "REST APIs",
+              "Microservices",
               "PostgreSQL",
               "MongoDB",
+              "Redis",
+              "Kafka",
               "Docker",
+              "Kubernetes",
               "Python",
               "FastAPI",
               "Machine Learning",
@@ -58,10 +118,7 @@
             "@id": "https://getuarjakupi.com/#website",
             "url": "https://getuarjakupi.com/",
             "name": "Getuar Jakupi",
-            "inLanguage": [
-              "en",
-              "sq"
-            ],
+            "inLanguage": ["en", "sq"],
             "publisher": {
               "@id": "https://getuarjakupi.com/#person"
             },
@@ -73,16 +130,20 @@
       }
     </script>
 
+    <!-- Apply saved theme before React renders -->
     <script>
       (function () {
         try {
           var stored = localStorage.getItem("gj-theme");
+
           var theme =
             stored === "light" || stored === "dark"
               ? stored
-              : window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
-              ? "light"
-              : "dark";
+              : window.matchMedia &&
+                  window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark";
+
           document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {
           document.documentElement.setAttribute("data-theme", "dark");
@@ -90,8 +151,17 @@
       })();
     </script>
   </head>
+
   <body>
-    <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+
     <div id="root"></div>
   </body>
 </html>
